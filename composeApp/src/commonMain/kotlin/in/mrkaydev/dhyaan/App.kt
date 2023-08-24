@@ -88,5 +88,3 @@ internal fun App() = AppTheme {
         }
     }
 }
-
-internal expect fun openUrl(url: String?)
