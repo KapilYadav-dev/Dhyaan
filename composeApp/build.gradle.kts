@@ -63,6 +63,8 @@ kotlin {
                 implementation(libs.composeIcons.featherIcons)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kstore)
+                implementation(libs.moko.mvvm.core)
+                implementation(libs.moko.mvvm.compose)
             }
         }
 

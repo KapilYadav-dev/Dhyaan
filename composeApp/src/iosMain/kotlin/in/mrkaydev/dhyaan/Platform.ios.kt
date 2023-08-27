@@ -7,3 +7,5 @@ internal actual fun openUrl(url: String?) {
     val nsUrl = url?.let { NSURL.URLWithString(it) } ?: return
     UIApplication.sharedApplication.openURL(nsUrl)
 }
+internal actual val platform: String
+    get() = "ios"

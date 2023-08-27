@@ -14,3 +14,6 @@ internal actual fun openUrl(url: String?) {
     }
     context.startActivity(intent)
 }
+
+internal actual val platform: String
+    get() = "android"

@@ -1,4 +1,4 @@
-package `in`.mrkaydev.dhyaan
+package `in`.mrkaydev.dhyaan.utils
 
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight

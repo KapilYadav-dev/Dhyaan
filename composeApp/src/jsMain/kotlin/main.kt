@@ -1,4 +1,4 @@
-import `in`.mrkaydev.dhyaan.App
+import `in`.mrkaydev.dhyaan.ui.screens.App
 import org.jetbrains.skiko.wasm.onWasmReady
 
 fun main() {
