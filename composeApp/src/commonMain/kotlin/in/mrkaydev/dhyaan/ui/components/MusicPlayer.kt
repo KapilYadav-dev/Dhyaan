@@ -27,7 +27,7 @@ import `in`.mrkaydev.dhyaan.utils.FontLoader
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun MusicPlayer(modifier: Modifier, musicDataList: List<MusicPlayerData>,index:(Int)->Unit) {
+fun MusicPlayer(modifier: Modifier, musicDataList: List<MusicPlayerData>,index:(Int)->Unit={}) {
     var isPlaying by remember { mutableStateOf(false) }
     var currentIndex by remember { mutableStateOf(0) }
     val musicState = musicDataList[currentIndex]
