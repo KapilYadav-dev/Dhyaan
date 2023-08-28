@@ -4,7 +4,9 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,19 +18,21 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import `in`.mrkaydev.dhyaan.theme.colorBlack
 import `in`.mrkaydev.dhyaan.theme.colorTransparent
 import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.Utils.buttonWidth
+import `in`.mrkaydev.dhyaan.utils.Utils.buttonTextSize
 
 @Composable
-fun SelectableButton(text:String,isClicked: () -> Boolean,buttonClicked:()->Unit) {
+fun SelectableButton(text: String, isClicked: () -> Boolean, buttonClicked: () -> Unit) {
     val bgColor by animateColorAsState(if (isClicked()) colorWhite else colorTransparent)
     val textColor by animateColorAsState(if (isClicked()) colorBlack else colorWhite)
 
+
     Box(
-        modifier = Modifier.defaultMinSize(120.dp).clip(RoundedCornerShape(32.dp))
+        modifier = Modifier.defaultMinSize(buttonWidth).clip(RoundedCornerShape(32.dp))
             .background(bgColor)
             .border(2.dp, colorWhite, RoundedCornerShape(32.dp))
             .clickable {
@@ -37,9 +41,10 @@ fun SelectableButton(text:String,isClicked: () -> Boolean,buttonClicked:()->Unit
     ) {
         Text(
             text = text,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp).align(Alignment.Center),
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+                .align(Alignment.Center),
             style = TextStyle(
-                fontSize = 18.sp,
+                fontSize = buttonTextSize,
                 fontFamily = FontLoader.appFont,
                 fontWeight = FontWeight.Bold,
                 color = textColor,

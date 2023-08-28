@@ -21,7 +21,12 @@ import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.components.MusicPlayer
 import `in`.mrkaydev.dhyaan.ui.components.SelectableButton
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.Utils
+import `in`.mrkaydev.dhyaan.utils.Utils.headerDevTitleTextSize
+import `in`.mrkaydev.dhyaan.utils.Utils.headerTitleTextSize
 import `in`.mrkaydev.dhyaan.utils.Utils.musicList
+import `in`.mrkaydev.dhyaan.utils.Utils.timerTextSize
+import `in`.mrkaydev.dhyaan.utils.Utils.verticalSpacer
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -38,15 +43,15 @@ internal fun App() {
     if (isFontLoaded) {
         Box(Modifier.fillMaxSize()) {
             Image(
-                painterResource("images/desert.jpeg"),
+                painterResource("images/tokiyo.jpeg"),
                 "bg",
                 Modifier.fillMaxSize(),
                 contentScale = if (platform == "android") ContentScale.Crop else ContentScale.FillBounds
             )
-            Column(Modifier.padding(start = 24.dp, top = 0.dp)) {
+            Column(Modifier.padding(start = 24.dp, top = 16.dp)) {
                 Text(
                     "dhyaan",
-                    fontSize = 24.sp,
+                    fontSize = headerTitleTextSize,
                     fontFamily = FontLoader.appFont,
                     fontWeight = FontWeight.Bold,
                     color = colorWhite,
@@ -54,18 +59,18 @@ internal fun App() {
                 )
                 Text(
                     "by mrkaydev",
-                    fontSize = 16.sp,
+                    fontSize = headerDevTitleTextSize,
                     fontFamily = FontLoader.appFont,
                     fontWeight = FontWeight.Light,
                     color = colorWhite,
                     textAlign = TextAlign.Center
                 )
             }
-            Image(painterResource("images/setting.png"), "", Modifier.padding(16.dp).size(24.dp).align(Alignment.TopEnd))
+            Image(painterResource("images/setting.png"), "", Modifier.padding(vertical = 30.dp, horizontal = 16.dp).size(Utils.settingSize).align(Alignment.TopEnd))
             Column(Modifier.align(Alignment.Center).fillMaxWidth()) {
                 Row(
                     Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Spacer(Modifier.width(32.dp))
@@ -105,17 +110,17 @@ internal fun App() {
                         })
                     Spacer(Modifier.width(32.dp))
                 }
-                Spacer(Modifier.height(24.dp))
+                Spacer(Modifier.height(verticalSpacer))
                 Text(
                     "45:00",
-                    fontSize = 48.sp,
+                    fontSize = timerTextSize,
                     fontFamily = FontLoader.appFont,
                     fontWeight = FontWeight.Bold,
                     color = colorWhite,
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
-                Spacer(Modifier.height(24.dp))
+                Spacer(Modifier.height(verticalSpacer))
                 Row(
                     Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center,
