@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import `in`.mrkaydev.dhyaan.utils.Utils
 
 val context = AndroidApp.INSTANCE
 
@@ -19,7 +20,7 @@ internal actual fun openUrl(url: String?) {
 }
 
 internal actual val platform: String
-    get() = "android"
+    get() = Utils.ANDROID
 
 internal actual suspend fun loadPlatformFonts(): FontFamily {
     return FontFamily(

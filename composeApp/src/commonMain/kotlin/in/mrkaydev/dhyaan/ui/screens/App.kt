@@ -13,7 +13,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.RefreshCcw
 import `in`.mrkaydev.dhyaan.platform
@@ -46,11 +45,11 @@ internal fun App() {
                 painterResource("images/tokiyo.jpeg"),
                 "bg",
                 Modifier.fillMaxSize(),
-                contentScale = if (platform == "android") ContentScale.Crop else ContentScale.FillBounds
+                contentScale = if (platform == Utils.ANDROID) ContentScale.Crop else ContentScale.FillBounds
             )
             Column(Modifier.padding(start = 24.dp, top = 16.dp)) {
                 Text(
-                    "dhyaan",
+                    Utils.APP_NAME,
                     fontSize = headerTitleTextSize,
                     fontFamily = FontLoader.appFont,
                     fontWeight = FontWeight.Bold,
@@ -137,7 +136,7 @@ internal fun App() {
                 }
             }
             MusicPlayer(
-                modifier = Modifier.fillMaxWidth(if (platform == "android" || platform == "ios") 1f else 0.25f)
+                modifier = Modifier.fillMaxWidth(if (platform == Utils.ANDROID || platform == Utils.IOS) 1f else 0.25f)
                     .align(Alignment.BottomStart),
                 musicList
             )
