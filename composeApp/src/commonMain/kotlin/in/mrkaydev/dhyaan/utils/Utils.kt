@@ -11,6 +11,7 @@ object Utils {
     const val IOS: String = "ios"
     const val WEB: String = "web"
     const val DESKTOP: String = "desktop"
+    const val POMODORO_TIME: Int = 45
 
     val buttonWidth = if (platform == WEB || platform == Utils.DESKTOP) 240.dp else 120.dp
     val verticalSpacer = if (platform == WEB || platform == Utils.DESKTOP) 56.dp else 24.dp

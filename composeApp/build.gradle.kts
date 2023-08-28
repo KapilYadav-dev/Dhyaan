@@ -90,7 +90,7 @@ kotlin {
                 implementation(compose.desktop.common)
                 implementation(compose.desktop.currentOs)
                 implementation(libs.ktor.client.okhttp)
-                // desktop
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
             }
         }
 
