@@ -175,9 +175,19 @@ class Home : Screen {
 
                 if (viewModel.showDialogForInstruction) {
                     val data = viewModel.timerType
+                    val title = if(data == Constants.POMODORO_TIME_KEY) {
+                        "Break time"
+                    } else {
+                        "Let's focus"
+                    }
+                    val description = if(data == Constants.POMODORO_TIME_KEY) {
+                        "Hurray you done your ${Constants.POMODORO_TIME} minutes of dhyaan app. Now its time for a break. You earned it."
+                    } else {
+                       "let's get back to work again..."
+                    }
                     CommonDialog(
-                        title = "Break time",
-                        description = "Hurray you done your first ${Constants.POMODORO_TIME} minutes of dhyaan app. Now its time for a break. You earned it.",
+                        title = title,
+                        description = description,
                         "sure, make sense"
                     ) {
                         when (data) {
