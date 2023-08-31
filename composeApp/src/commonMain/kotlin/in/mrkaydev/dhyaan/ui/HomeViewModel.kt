@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
+import `in`.mrkaydev.dhyaan.AudioPlayer
 import `in`.mrkaydev.dhyaan.data.HomeUiState
+import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import kotlinx.coroutines.*
@@ -17,6 +19,8 @@ import kotlin.time.DurationUnit
 
 class HomeViewModel : ScreenModel {
 
+    private var audioPlayer: AudioPlayer? = null
+    var isAnyAudioPlaying by mutableStateOf(false)
     var pomodoroCount by mutableStateOf(0)
     var isPomodoroSelected by mutableStateOf(true)
     var isLongBreakSelected by mutableStateOf(false)
@@ -35,6 +39,13 @@ class HomeViewModel : ScreenModel {
 
     init {
         loadFonts()
+        audioPlayer = AudioPlayer()
+    }
+
+    override fun onDispose() {
+        super.onDispose()
+        timerJob = null
+        audioPlayer =null
     }
 
     private fun loadFonts() {
@@ -111,5 +122,23 @@ class HomeViewModel : ScreenModel {
             isPomodoroSelected = false
             isLongBreakSelected = false
         }
+    }
+    fun playAudio() {
+        val path = if (platform == Constants.ANDROID) "audio_one" else "sounds/audio_one.mp3"
+        playAudio(path)
+    }
+
+    private fun playAudio(path: String) {
+        coroutineScope.launch {
+            audioPlayer?.playAudio(path)
+        }
+    }
+
+    fun pauseAudio() {
+        audioPlayer?.pauseAudio()
+    }
+
+    fun resumeAudio() {
+        audioPlayer?.resumeAudio()
     }
 }

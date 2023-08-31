@@ -1,6 +1,7 @@
 package `in`.mrkaydev.dhyaan
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -43,14 +44,42 @@ internal actual suspend fun loadPlatformFonts(): FontFamily {
     )
 }
 
-internal actual class AudioPlayer  actual constructor(){
+internal actual class AudioPlayer actual constructor() {
+    private var mediaPlayer: MediaPlayer? = null
     actual fun playAudio(resourceFileName: String) {
+        playAudioOnAndroid(resourceFileName)
     }
 
     actual fun pauseAudio() {
+        pauseAudioOnAndroid()
     }
 
     actual fun resumeAudio() {
+        resumeAudioOnAndroid()
+    }
+
+    private fun playAudioOnAndroid(resourceFileName: String) {
+        if (mediaPlayer != null) {
+            mediaPlayer?.pause()
+            mediaPlayer?.release()
+        }
+        val resID: Int = context.resources
+            .getIdentifier(resourceFileName, "raw", context.packageName)
+        mediaPlayer = MediaPlayer.create(context, resID).apply {
+            start()
+        }
+    }
+
+    private fun pauseAudioOnAndroid() {
+        if (mediaPlayer != null) {
+            mediaPlayer?.pause()
+        }
+    }
+
+    private fun resumeAudioOnAndroid() {
+        if (mediaPlayer != null) {
+            mediaPlayer?.start()
+        }
     }
 }
 

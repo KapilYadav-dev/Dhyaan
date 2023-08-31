@@ -7,6 +7,7 @@ import `in`.mrkaydev.dhyaan.utils.Constants
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.resources.resource
+import org.w3c.dom.Audio
 
 internal actual fun openUrl(url: String?) {
     url?.let { window.open(it) }
@@ -41,14 +42,38 @@ internal actual suspend fun loadPlatformFonts(): FontFamily {
     )
 }
 
-internal actual class AudioPlayer  actual constructor(){
+internal actual class AudioPlayer {
+    private var audioElement: Audio? = null
     actual fun playAudio(resourceFileName: String) {
+        playAudioOnWeb(resourceFileName)
     }
 
     actual fun pauseAudio() {
+        pauseAudioOnWeb()
     }
 
     actual fun resumeAudio() {
+        resumeAudioOnWeb()
+    }
+    private fun playAudioOnWeb(resourceFileName: String) {
+        if (audioElement != null) {
+            audioElement?.pause() // Pause if audio is already playing
+        }
+
+        audioElement = Audio(resourceFileName)
+        audioElement?.play()
+    }
+
+    private fun pauseAudioOnWeb() {
+        if (audioElement != null) {
+            audioElement?.pause()
+        }
+    }
+
+    private fun resumeAudioOnWeb() {
+        if (audioElement != null) {
+            audioElement?.play()
+        }
     }
 }
 

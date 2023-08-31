@@ -23,12 +23,18 @@ import compose.icons.feathericons.ChevronRight
 import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.theme.colorPlayerBack
 import `in`.mrkaydev.dhyaan.theme.colorWhite
+import `in`.mrkaydev.dhyaan.ui.HomeViewModel
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun MusicPlayer(modifier: Modifier, musicDataList: List<MusicPlayerData>,index:(Int)->Unit={}) {
+fun MusicPlayer(
+    modifier: Modifier,
+    musicDataList: List<MusicPlayerData>,
+    viewModel : HomeViewModel,
+    index: (Int) -> Unit = {}
+) {
     var isPlaying by remember { mutableStateOf(false) }
     var currentIndex by remember { mutableStateOf(0) }
     val musicState = musicDataList[currentIndex]
@@ -83,7 +89,17 @@ fun MusicPlayer(modifier: Modifier, musicDataList: List<MusicPlayerData>,index:(
             )
             Image(
                 modifier = Modifier.size(40.dp)
-                    .clickable { isPlaying = !isPlaying },
+                    .clickable {
+                        isPlaying = !isPlaying
+                        if(isPlaying && viewModel.isAnyAudioPlaying) {
+                            viewModel.resumeAudio()
+                        } else if(isPlaying) {
+                            viewModel.isAnyAudioPlaying=true
+                            viewModel.playAudio()
+                        } else {
+                            viewModel.pauseAudio()
+                        }
+                    },
                 painter = painterResource("images/${if (isPlaying) "pause" else "play"}.${if (platform == Constants.WEB) "png" else "xml"}"),
                 contentDescription = "image description",
                 contentScale = ContentScale.FillBounds

@@ -171,7 +171,8 @@ class Home : Screen {
                     MusicPlayer(
                         modifier = Modifier.fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
                             .align(Alignment.BottomStart),
-                        Constants.musicList
+                        Constants.musicList,
+                        viewModel
                     )
                     if (platform == Constants.WEB) Icon(
                         FeatherIcons.Monitor,
