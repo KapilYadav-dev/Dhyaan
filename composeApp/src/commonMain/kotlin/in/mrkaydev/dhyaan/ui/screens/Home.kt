@@ -18,8 +18,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.RefreshCcw
-import dev.icerock.moko.mvvm.compose.getViewModel
-import dev.icerock.moko.mvvm.compose.viewModelFactory
 import `in`.mrkaydev.dhyaan.data.HomeUiState
 import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.theme.colorWhite
@@ -62,7 +60,7 @@ class Home:Screen {
                 val formattedTime = formatTime(minutes, seconds % 60)
                 Box(Modifier.fillMaxSize()) {
                     Image(
-                        painterResource("images/tokiyo.jpeg"),
+                        painterResource("images/gradient-dark.jpeg"),
                         "bg",
                         Modifier.fillMaxSize(),
                         contentScale = if (platform == Utils.ANDROID) ContentScale.Crop else ContentScale.FillBounds
