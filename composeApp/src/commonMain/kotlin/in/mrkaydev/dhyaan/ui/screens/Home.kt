@@ -1,5 +1,7 @@
 package `in`.mrkaydev.dhyaan.ui.screens
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -10,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,6 +36,7 @@ import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import `in`.mrkaydev.dhyaan.utils.Utils
 import `in`.mrkaydev.dhyaan.utils.Utils.formatTime
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -49,6 +53,8 @@ class Home : Screen {
         var isSettingOpened by remember { mutableStateOf(false) }
         var timerFirstStarted by remember { mutableStateOf(false) }
         var timerRunning by remember { mutableStateOf(false) }
+        val rotationState = remember { Animatable(0f) }
+        val scope = rememberCoroutineScope()
 
         when (homeUiState.value) {
             HomeUiState.Loading -> {
@@ -165,7 +171,14 @@ class Home : Screen {
                                 FeatherIcons.RefreshCcw,
                                 "",
                                 tint = colorWhite,
-                                modifier = Modifier.size(32.dp)
+                                modifier = Modifier.size(32.dp).clickable {
+                                    scope.launch {
+                                        rotationState.animateTo(
+                                            targetValue = rotationState.targetValue + 360f,
+                                            animationSpec = tween(durationMillis = 2000)
+                                        )
+                                    }
+                                }.graphicsLayer(rotationZ = rotationState.value)
                             )
                         }
                     }
