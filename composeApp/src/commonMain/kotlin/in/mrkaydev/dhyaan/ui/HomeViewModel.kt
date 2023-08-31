@@ -10,6 +10,7 @@ import `in`.mrkaydev.dhyaan.data.HomeUiState
 import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.Utils
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -123,9 +124,9 @@ class HomeViewModel : ScreenModel {
             isLongBreakSelected = false
         }
     }
-    fun playAudio() {
-        val path = if (platform == Constants.ANDROID) "audio_one" else "sounds/audio_one.mp3"
-        playAudio(path)
+    fun playAudio(idx:Int) {
+        val path = if (platform == Constants.ANDROID) Utils.musicList[idx].androidId else Utils.musicList[idx].audio
+        path?.let { playAudio(it) }
     }
 
     private fun playAudio(path: String) {

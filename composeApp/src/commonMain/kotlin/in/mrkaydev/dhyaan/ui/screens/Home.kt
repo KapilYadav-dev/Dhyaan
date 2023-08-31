@@ -31,6 +31,7 @@ import `in`.mrkaydev.dhyaan.ui.components.SelectableButton
 import `in`.mrkaydev.dhyaan.ui.components.SettingDialog
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.Utils
 import `in`.mrkaydev.dhyaan.utils.Utils.formatTime
 import org.jetbrains.compose.resources.painterResource
 
@@ -171,7 +172,7 @@ class Home : Screen {
                     MusicPlayer(
                         modifier = Modifier.fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
                             .align(Alignment.BottomStart),
-                        Constants.musicList,
+                        Utils.musicList,
                         viewModel
                     )
                     if (platform == Constants.WEB) Icon(

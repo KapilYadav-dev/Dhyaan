@@ -61,6 +61,7 @@ internal actual class AudioPlayer {
         }
 
         audioElement = Audio(resourceFileName)
+        audioElement?.loop=true
         audioElement?.play()
     }
 

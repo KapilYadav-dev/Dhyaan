@@ -66,6 +66,7 @@ internal actual class AudioPlayer actual constructor() {
         val resID: Int = context.resources
             .getIdentifier(resourceFileName, "raw", context.packageName)
         mediaPlayer = MediaPlayer.create(context, resID).apply {
+            isLooping = true
             start()
         }
     }

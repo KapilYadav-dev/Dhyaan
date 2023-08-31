@@ -38,6 +38,17 @@ fun MusicPlayer(
     var isPlaying by remember { mutableStateOf(false) }
     var currentIndex by remember { mutableStateOf(0) }
     val musicState = musicDataList[currentIndex]
+    val maxChars = 20
+    val title = if (musicState.title.length > maxChars) {
+        "${musicState.title.substring(0, maxChars)}..."
+    } else {
+        musicState.title
+    }
+    val desc = if (musicState.description.length > maxChars) {
+        "${musicState.description.substring(0, maxChars)}..."
+    } else {
+        musicState.description
+    }
 
     Box(
         modifier = modifier.padding(16.dp).background(
@@ -54,7 +65,7 @@ fun MusicPlayer(
             )
             Column {
                 Text(
-                    musicState.title.toString(),
+                    title,
                     style = TextStyle(
                         fontSize = 16.sp,
                         fontFamily = FontLoader.appFont,
@@ -63,7 +74,7 @@ fun MusicPlayer(
                     )
                 )
                 Text(
-                    text = musicState.description.toString(),
+                    text = desc,
                     style = TextStyle(
                         fontSize = 12.sp,
                         fontFamily = FontLoader.appFont,
@@ -83,8 +94,9 @@ fun MusicPlayer(
                 tint = colorWhite,
                 modifier = Modifier.size(32.dp).clickable {
                     currentIndex = (currentIndex - 1 + musicDataList.size) % musicDataList.size
-                    isPlaying = false
+                    isPlaying = true
                     index(currentIndex)
+                    viewModel.playAudio(currentIndex)
                 }
             )
             Image(
@@ -95,7 +107,7 @@ fun MusicPlayer(
                             viewModel.resumeAudio()
                         } else if(isPlaying) {
                             viewModel.isAnyAudioPlaying=true
-                            viewModel.playAudio()
+                            viewModel.playAudio(0)
                         } else {
                             viewModel.pauseAudio()
                         }
@@ -110,8 +122,9 @@ fun MusicPlayer(
                 tint = colorWhite,
                 modifier = Modifier.size(32.dp).clickable {
                     currentIndex = (currentIndex + 1) % musicDataList.size
-                    isPlaying = false
+                    isPlaying = true
                     index(currentIndex)
+                    viewModel.playAudio(currentIndex)
                 }
             )
         }
@@ -120,8 +133,9 @@ fun MusicPlayer(
 }
 
 data class MusicPlayerData(
-    val title: String? = null,
-    val description: String? = null,
+    val title: String = "music",
+    val description: String = "by unknown",
     val image: String? = null,
     val audio: String? = null,
+    val androidId: String? = null,
 )

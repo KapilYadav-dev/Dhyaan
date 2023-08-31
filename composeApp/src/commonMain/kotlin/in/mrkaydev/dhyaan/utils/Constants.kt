@@ -33,12 +33,4 @@ object Constants {
     val headerDevTitleTextSize = if (platform == WEB || platform == DESKTOP) 18.sp else 14.sp
     val buttonTextSize = if (platform == WEB || platform == DESKTOP) 20.sp else 16.sp
     val timerTextSize = if (platform == WEB || platform == DESKTOP) 120.sp else 48.sp
-
-    val musicList = listOf(
-        MusicPlayerData("Song Title", "Song Description", "ocean"),
-        MusicPlayerData("Song Title", "Song Description", "desert"),
-        MusicPlayerData("Song Title", "Song Description", "mountain"),
-        MusicPlayerData("Song Title", "Song Description", "snow"),
-        MusicPlayerData("Song Title", "Song Description", "tokiyo")
-    )
 }
