@@ -6,6 +6,7 @@ import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.ui.components.MusicPlayerData
 
 object Constants {
+
     const val APP_NAME: String = "Dhyaan"
     const val ANDROID: String = "android"
     const val IOS: String = "ios"
@@ -19,6 +20,7 @@ object Constants {
     const val POMODORO_TIME: Int = 3
     const val BREAK_TIMER_LONG: Int = 2
     const val BREAK_TIMER_SHORT: Int = 1
+    const val POMODORO_SERIES_FREQUENCY: Int = 4
 
     val buttonWidth = if (platform == WEB || platform == DESKTOP) 240.dp else 120.dp
     val verticalSpacer = if (platform == WEB || platform == DESKTOP) 56.dp else 24.dp

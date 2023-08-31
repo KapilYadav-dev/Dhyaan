@@ -104,18 +104,18 @@ class Home : Screen {
 
                             Spacer(Modifier.width(16.dp))
                             SelectableButton(
-                                text = "long break",
-                                isClicked = { viewModel.isLongBreakSelected },
-                                buttonClicked = {
-                                    viewModel.isLongBreakSelectedActions()
-                                })
-
-                            Spacer(Modifier.width(16.dp))
-                            SelectableButton(
                                 text = "short break",
                                 isClicked = { viewModel.isShortBreakSelected },
                                 buttonClicked = {
                                     viewModel.isShortBreakSelectedActions()
+                                })
+
+                            Spacer(Modifier.width(16.dp))
+                            SelectableButton(
+                                text = "long break",
+                                isClicked = { viewModel.isLongBreakSelected },
+                                buttonClicked = {
+                                    viewModel.isLongBreakSelectedActions()
                                 })
                             Spacer(Modifier.width(32.dp))
                         }
@@ -167,12 +167,18 @@ class Home : Screen {
                     )
                 }
 
-                if(viewModel.showDialogForInstruction) {
+                if (viewModel.showDialogForInstruction) {
                     val data = viewModel.timerType
-                    CommonDialog(title = "Break time", description = "Hurray you done your first ${Constants.POMODORO_TIME} minutes of dhyaan app. Now its time for a break. You earned it.","sure, make sense") {
+                    CommonDialog(
+                        title = "Break time",
+                        description = "Hurray you done your first ${Constants.POMODORO_TIME} minutes of dhyaan app. Now its time for a break. You earned it.",
+                        "sure, make sense"
+                    ) {
                         when (data) {
                             Constants.POMODORO_TIME_KEY -> {
-                                if(viewModel.pomodoroCount%2==1) viewModel.startTimer(Constants.BREAK_TIMER_LONG) else viewModel.startTimer(Constants.BREAK_TIMER_SHORT)
+                                if (viewModel.pomodoroCount > Constants.POMODORO_SERIES_FREQUENCY) viewModel.startTimer(
+                                    Constants.BREAK_TIMER_LONG
+                                ) else viewModel.startTimer(Constants.BREAK_TIMER_SHORT)
                             }
                             Constants.BREAK_TIMER_LONG_KEY -> {
                                 viewModel.startTimer(Constants.POMODORO_TIME)
@@ -181,7 +187,7 @@ class Home : Screen {
                                 viewModel.startTimer(Constants.POMODORO_TIME)
                             }
                         }
-                        viewModel.showDialogForInstruction=false
+                        viewModel.showDialogForInstruction = false
                     }
                 }
             }
