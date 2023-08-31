@@ -64,4 +64,28 @@ class HomeViewModel : ScreenModel {
             startTimer(remainingTime)
         }
     }
+
+    fun isPomodoroSelectedActions() {
+        if (!isPomodoroSelected) {
+            isPomodoroSelected = !isPomodoroSelected
+            isLongBreakSelected = false
+            isShortBreakSelected = false
+        }
+    }
+
+    fun isLongBreakSelectedActions() {
+        if (!isLongBreakSelected) {
+            isLongBreakSelected = !isLongBreakSelected
+            isPomodoroSelected = false
+            isShortBreakSelected = false
+        }
+    }
+
+    fun isShortBreakSelectedActions() {
+        if (!isShortBreakSelected) {
+            isShortBreakSelected = !isShortBreakSelected
+            isPomodoroSelected = false
+            isLongBreakSelected = false
+        }
+    }
 }

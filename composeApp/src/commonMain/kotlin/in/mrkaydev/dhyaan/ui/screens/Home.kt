@@ -46,6 +46,7 @@ class Home:Screen {
 
         val initialTimeInMinutes by remember { mutableStateOf((Constants.POMODORO_TIME).minutes) }
         val initialTime by remember { mutableStateOf(initialTimeInMinutes.toLong(DurationUnit.MILLISECONDS)) }
+        val scope = rememberCoroutineScope()
 
         when (homeUiState.value) {
             HomeUiState.Loading -> {
@@ -58,6 +59,7 @@ class Home:Screen {
                 val seconds = currentTime / 1000
                 val minutes = seconds / 60
                 val formattedTime = formatTime(minutes, seconds % 60)
+
                 Box(Modifier.fillMaxSize()) {
                     Image(
                         painterResource("images/gradient-dark.jpeg"),
@@ -100,11 +102,7 @@ class Home:Screen {
                                 text = "pomodoro",
                                 isClicked = { viewModel.isPomodoroSelected },
                                 buttonClicked = {
-                                    if (!viewModel.isPomodoroSelected) {
-                                        viewModel.isPomodoroSelected = !viewModel.isPomodoroSelected
-                                        viewModel.isLongBreakSelected = false
-                                        viewModel.isShortBreakSelected = false
-                                    }
+                                    viewModel.isPomodoroSelectedActions()
                                 })
 
                             Spacer(Modifier.width(16.dp))
@@ -112,11 +110,7 @@ class Home:Screen {
                                 text = "long break",
                                 isClicked = { viewModel.isLongBreakSelected },
                                 buttonClicked = {
-                                    if (!viewModel.isLongBreakSelected) {
-                                        viewModel.isLongBreakSelected = !viewModel.isLongBreakSelected
-                                        viewModel.isPomodoroSelected = false
-                                        viewModel.isShortBreakSelected = false
-                                    }
+                                    viewModel.isLongBreakSelectedActions()
                                 })
 
                             Spacer(Modifier.width(16.dp))
@@ -124,11 +118,7 @@ class Home:Screen {
                                 text = "short break",
                                 isClicked = { viewModel.isShortBreakSelected },
                                 buttonClicked = {
-                                    if (!viewModel.isShortBreakSelected) {
-                                        viewModel.isShortBreakSelected = !viewModel.isShortBreakSelected
-                                        viewModel.isPomodoroSelected = false
-                                        viewModel.isLongBreakSelected = false
-                                    }
+                                    viewModel.isShortBreakSelectedActions()
                                 })
                             Spacer(Modifier.width(32.dp))
                         }
