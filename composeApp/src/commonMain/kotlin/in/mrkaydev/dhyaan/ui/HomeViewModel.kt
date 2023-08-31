@@ -3,6 +3,9 @@ package `in`.mrkaydev.dhyaan.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import cafe.adriel.voyager.core.model.ScreenModel
+import cafe.adriel.voyager.core.model.coroutineScope
+import cafe.adriel.voyager.core.screen.Screen
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import `in`.mrkaydev.dhyaan.data.HomeUiState
 import `in`.mrkaydev.dhyaan.utils.FontLoader
@@ -14,7 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.DurationUnit
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel : ScreenModel {
 
     var isPomodoroSelected by mutableStateOf(true)
     var isLongBreakSelected by mutableStateOf(false)
@@ -34,7 +37,7 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun loadFonts() {
-        viewModelScope.launch {
+        coroutineScope.launch {
             withContext(Dispatchers.Default) { FontLoader.loadFontsAsync() }
             _homeUiState.emit(HomeUiState.Success)
         }
@@ -43,7 +46,7 @@ class HomeViewModel : ViewModel() {
     fun startTimer(initialTime: Long) {
         if (timerJob == null) {
             remainingTime = initialTime
-            timerJob = viewModelScope.launch {
+            timerJob = coroutineScope.launch {
                 while (remainingTime > 0) {
                     _currentTime.value = remainingTime
                     delay(1000)

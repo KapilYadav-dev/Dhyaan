@@ -40,7 +40,6 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
         }
-        extraSpecAttributes["resources"] = "['src/commonMain/resources/**']"
     }
 
     sourceSets {
@@ -81,7 +80,6 @@ kotlin {
                 implementation(libs.compose.uitooling)
                 implementation(libs.kotlinx.coroutines.android)
                 implementation(libs.ktor.client.okhttp)
-                // android specific depend
             }
         }
 
@@ -97,14 +95,12 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(compose.html.core)
-                // web
             }
         }
 
         val iosMain by getting {
             dependencies {
                 implementation(libs.ktor.client.darwin)
-                // ios spec
             }
         }
 
@@ -113,11 +109,11 @@ kotlin {
 
 android {
     namespace = "in.mrkaydev.dhyaan"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
 
         applicationId = "in.mrkaydev.dhyaan.androidApp"
         versionCode = 1
