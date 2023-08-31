@@ -169,7 +169,7 @@ class Home : Screen {
 
                 if(viewModel.showDialogForInstruction) {
                     val data = viewModel.timerType
-                    CommonDialog(title = "Break time", description = "Hurray you done your first ${Constants.POMODORO_TIME} Pomodoro minutes. Now its time for a break. You earned it.","sure, make sense") {
+                    CommonDialog(title = "Break time", description = "Hurray you done your first ${Constants.POMODORO_TIME} minutes of dhyaan app. Now its time for a break. You earned it.","sure, make sense") {
                         when (data) {
                             Constants.POMODORO_TIME_KEY -> {
                                 if(viewModel.pomodoroCount%2==1) viewModel.startTimer(Constants.BREAK_TIMER_LONG) else viewModel.startTimer(Constants.BREAK_TIMER_SHORT)
