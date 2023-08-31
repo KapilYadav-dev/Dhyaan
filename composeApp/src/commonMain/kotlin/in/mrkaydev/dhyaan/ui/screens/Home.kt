@@ -22,16 +22,16 @@ import `in`.mrkaydev.dhyaan.data.HomeUiState
 import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.HomeViewModel
+import `in`.mrkaydev.dhyaan.ui.components.CommonDialog
 import `in`.mrkaydev.dhyaan.ui.components.MusicPlayer
 import `in`.mrkaydev.dhyaan.ui.components.SelectableButton
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.Utils.formatTime
 import org.jetbrains.compose.resources.painterResource
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.DurationUnit
 
 
-class Home:Screen {
+class Home : Screen {
     override val key: ScreenKey
         get() = "homeScreen"
 
@@ -43,10 +43,6 @@ class Home:Screen {
 
         var timerFirstStarted by remember { mutableStateOf(false) }
         var timerRunning by remember { mutableStateOf(false) }
-
-        val initialTimeInMinutes by remember { mutableStateOf((Constants.POMODORO_TIME).minutes) }
-        val initialTime by remember { mutableStateOf(initialTimeInMinutes.toLong(DurationUnit.MILLISECONDS)) }
-        val scope = rememberCoroutineScope()
 
         when (homeUiState.value) {
             HomeUiState.Loading -> {
@@ -88,7 +84,8 @@ class Home:Screen {
                     Image(
                         painterResource("images/setting.png"),
                         "",
-                        Modifier.padding(vertical = 64.dp, horizontal = 16.dp).size(Constants.settingSize)
+                        Modifier.padding(vertical = 64.dp, horizontal = 16.dp)
+                            .size(Constants.settingSize)
                             .align(Alignment.TopEnd)
                     )
                     Column(Modifier.align(Alignment.Center).fillMaxWidth()) {
@@ -148,11 +145,12 @@ class Home:Screen {
                                 } else if (timerFirstStarted) {
                                     viewModel.resumeTimer()
                                 } else {
-                                    viewModel.startTimer(initialTime)
+                                    viewModel.startTimer(Constants.POMODORO_TIME)
                                     timerFirstStarted = true
                                 }
                                 timerRunning = !timerRunning
-                            }, isCtaButton = true)
+                            }, isCtaButton = true
+                            )
                             Spacer(modifier = Modifier.width(32.dp))
                             Icon(
                                 FeatherIcons.RefreshCcw,
@@ -168,14 +166,26 @@ class Home:Screen {
                         Constants.musicList
                     )
                 }
+
+                if(viewModel.showDialogForInstruction) {
+                    val data = viewModel.timerType
+                    CommonDialog(onDismiss = {
+                        when (data) {
+                            Constants.POMODORO_TIME_KEY -> {
+                                if(viewModel.pomodoroCount%2==1) viewModel.startTimer(Constants.BREAK_TIMER_LONG) else viewModel.startTimer(Constants.BREAK_TIMER_SHORT)
+                            }
+                            Constants.BREAK_TIMER_LONG_KEY -> {
+                                viewModel.startTimer(Constants.POMODORO_TIME)
+                            }
+                            Constants.BREAK_TIMER_SHORT_KEY -> {
+                                viewModel.startTimer(Constants.POMODORO_TIME)
+                            }
+                        }
+                        viewModel.showDialogForInstruction=false
+                    }, onExit = {
+                    })
+                }
             }
         }
     }
-}
-
-
-fun formatTime(minutes: Long, seconds: Long): String {
-    val formattedMinutes = minutes.toString().padStart(2, '0')
-    val formattedSeconds = seconds.toString().padStart(2, '0')
-    return "$formattedMinutes:$formattedSeconds"
 }

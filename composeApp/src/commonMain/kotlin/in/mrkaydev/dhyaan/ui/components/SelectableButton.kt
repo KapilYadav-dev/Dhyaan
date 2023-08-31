@@ -60,7 +60,7 @@ fun SelectableButton(
         ).defaultMinSize(buttonWidth).clip(RoundedCornerShape(32.dp))
             .background(bgColor.value)
             .clickable {
-                buttonClicked()
+                if(isCtaButton) buttonClicked()
             }
     ) {
         Text(

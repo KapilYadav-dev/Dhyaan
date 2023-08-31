@@ -10,7 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.core.view.WindowCompat
-import `in`.mrkaydev.dhyaan.ui.components.CommonDialog
+import `in`.mrkaydev.dhyaan.ui.components.AlertDialog
 import `in`.mrkaydev.dhyaan.ui.screens.App
 
 class AndroidApp : Application() {
@@ -31,7 +31,7 @@ class AppActivity : ComponentActivity() {
         setContent {
             var isBackPressed by rememberSaveable { mutableStateOf(false) }
 
-            if (isBackPressed) CommonDialog(positiveButtonClicked = {
+            if (isBackPressed) AlertDialog(positiveButtonClicked = {
                 isBackPressed = false
             }, negativeButtonClicked = {
                 isBackPressed = false
