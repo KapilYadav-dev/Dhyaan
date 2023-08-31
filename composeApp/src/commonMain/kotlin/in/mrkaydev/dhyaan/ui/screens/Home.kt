@@ -18,9 +18,11 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import compose.icons.FeatherIcons
+import compose.icons.feathericons.Monitor
 import compose.icons.feathericons.RefreshCcw
 import `in`.mrkaydev.dhyaan.data.HomeUiState
 import `in`.mrkaydev.dhyaan.platform
+import `in`.mrkaydev.dhyaan.showFullScreenWebOnly
 import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.HomeViewModel
 import `in`.mrkaydev.dhyaan.ui.components.CommonDialog
@@ -91,7 +93,7 @@ class Home : Screen {
                             .size(Constants.settingSize)
                             .align(Alignment.TopEnd)
                             .clickable {
-                                isSettingOpened=true
+                                isSettingOpened = true
                             }
                     )
                     Column(Modifier.align(Alignment.Center).fillMaxWidth()) {
@@ -171,19 +173,28 @@ class Home : Screen {
                             .align(Alignment.BottomStart),
                         Constants.musicList
                     )
+                    if (platform == Constants.WEB) Icon(
+                        FeatherIcons.Monitor,
+                        "",
+                        modifier = Modifier.padding(32.dp).size(32.dp).align(Alignment.BottomEnd)
+                            .clickable {
+                                showFullScreenWebOnly()
+                            },
+                        tint = colorWhite
+                    )
                 }
 
                 if (viewModel.showDialogForInstruction) {
                     val data = viewModel.timerType
-                    val title = if(data == Constants.POMODORO_TIME_KEY) {
+                    val title = if (data == Constants.POMODORO_TIME_KEY) {
                         "Break time"
                     } else {
                         "Let's focus"
                     }
-                    val description = if(data == Constants.POMODORO_TIME_KEY) {
+                    val description = if (data == Constants.POMODORO_TIME_KEY) {
                         "Hurray you done your ${Constants.POMODORO_TIME} minutes of dhyaan app. Now its time for a break. You earned it."
                     } else {
-                       "let's get back to work again..."
+                        "let's get back to work again..."
                     }
                     CommonDialog(
                         title = title,
@@ -209,7 +220,7 @@ class Home : Screen {
 
                 if (isSettingOpened) {
                     SettingDialog {
-                        isSettingOpened=false
+                        isSettingOpened = false
                     }
                 }
             }
