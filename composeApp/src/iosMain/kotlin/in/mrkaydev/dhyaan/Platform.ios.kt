@@ -40,3 +40,17 @@ internal actual suspend fun loadPlatformFonts(): FontFamily {
         ),
     )
 }
+
+internal actual class AudioPlayer actual constructor(){
+    actual fun playAudio(resourceFileName: String) {
+    }
+
+    actual fun pauseAudio() {
+    }
+
+    actual fun resumeAudio() {
+    }
+}
+
+internal actual fun showFullScreenWebOnly() {
+}

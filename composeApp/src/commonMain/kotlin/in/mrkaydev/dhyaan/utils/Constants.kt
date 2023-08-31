@@ -22,7 +22,7 @@ object Constants {
     const val BREAK_TIMER_SHORT: Int = 1
     const val POMODORO_SERIES_FREQUENCY: Int = 4
 
-    val buttonWidth = if (platform == WEB || platform == DESKTOP) 240.dp else 120.dp
+    val buttonWidth = if (platform == WEB || platform == DESKTOP) 160.dp else 120.dp
     val verticalSpacer = if (platform == WEB || platform == DESKTOP) 56.dp else 24.dp
     val settingSize = if (platform == WEB || platform == DESKTOP) 24.dp else 20.dp
 
@@ -31,8 +31,8 @@ object Constants {
     val settingOptionTitleText = if (platform == WEB || platform == DESKTOP) 24.sp else 16.sp
     val headerTitleTextSize = if (platform == WEB || platform == DESKTOP) 32.sp else 20.sp
     val headerDevTitleTextSize = if (platform == WEB || platform == DESKTOP) 18.sp else 14.sp
-    val buttonTextSize = if (platform == WEB || platform == DESKTOP) 24.sp else 16.sp
-    val timerTextSize = if (platform == WEB || platform == DESKTOP) 80.sp else 48.sp
+    val buttonTextSize = if (platform == WEB || platform == DESKTOP) 20.sp else 16.sp
+    val timerTextSize = if (platform == WEB || platform == DESKTOP) 120.sp else 48.sp
 
     val musicList = listOf(
         MusicPlayerData("Song Title", "Song Description", "ocean"),
