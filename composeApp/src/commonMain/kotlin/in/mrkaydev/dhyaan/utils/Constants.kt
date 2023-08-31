@@ -25,6 +25,10 @@ object Constants {
     val buttonWidth = if (platform == WEB || platform == DESKTOP) 240.dp else 120.dp
     val verticalSpacer = if (platform == WEB || platform == DESKTOP) 56.dp else 24.dp
     val settingSize = if (platform == WEB || platform == DESKTOP) 24.dp else 20.dp
+
+
+    val settingHeaderText = if (platform == WEB || platform == DESKTOP) 40.sp else 24.sp
+    val settingOptionTitleText = if (platform == WEB || platform == DESKTOP) 24.sp else 16.sp
     val headerTitleTextSize = if (platform == WEB || platform == DESKTOP) 32.sp else 20.sp
     val headerDevTitleTextSize = if (platform == WEB || platform == DESKTOP) 18.sp else 14.sp
     val buttonTextSize = if (platform == WEB || platform == DESKTOP) 24.sp else 16.sp
