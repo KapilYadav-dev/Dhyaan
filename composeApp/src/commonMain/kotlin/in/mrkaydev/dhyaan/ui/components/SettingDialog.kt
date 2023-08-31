@@ -111,7 +111,7 @@ fun SettingDialog(onDismiss: () -> Unit) {
                     Modifier.fillMaxWidth().padding(vertical = 16.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    SelectableButton("close", false, { false }, {
+                    SelectableButton("close", true, { false }, {
                         onDismiss()
                     })
                     SelectableButton("save", true, { true }, {

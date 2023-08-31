@@ -1,6 +1,7 @@
 package `in`.mrkaydev.dhyaan.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -25,6 +26,7 @@ import `in`.mrkaydev.dhyaan.ui.HomeViewModel
 import `in`.mrkaydev.dhyaan.ui.components.CommonDialog
 import `in`.mrkaydev.dhyaan.ui.components.MusicPlayer
 import `in`.mrkaydev.dhyaan.ui.components.SelectableButton
+import `in`.mrkaydev.dhyaan.ui.components.SettingDialog
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import `in`.mrkaydev.dhyaan.utils.Utils.formatTime
@@ -41,6 +43,7 @@ class Home : Screen {
         val homeUiState = viewModel.homeUiState.collectAsState()
         val currentTime by viewModel.currentTime.collectAsState()
 
+        var isSettingOpened by remember { mutableStateOf(false) }
         var timerFirstStarted by remember { mutableStateOf(false) }
         var timerRunning by remember { mutableStateOf(false) }
 
@@ -84,9 +87,12 @@ class Home : Screen {
                     Image(
                         painterResource("images/setting.png"),
                         "",
-                        Modifier.padding(vertical = 64.dp, horizontal = 16.dp)
+                        Modifier.padding(vertical = 64.dp, horizontal = 24.dp)
                             .size(Constants.settingSize)
                             .align(Alignment.TopEnd)
+                            .clickable {
+                                isSettingOpened=true
+                            }
                     )
                     Column(Modifier.align(Alignment.Center).fillMaxWidth()) {
                         Row(
@@ -188,6 +194,12 @@ class Home : Screen {
                             }
                         }
                         viewModel.showDialogForInstruction = false
+                    }
+                }
+
+                if (isSettingOpened) {
+                    SettingDialog {
+                        isSettingOpened=false
                     }
                 }
             }
