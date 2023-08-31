@@ -51,7 +51,7 @@ fun MusicPlayer(
     }
 
     Box(
-        modifier = modifier.padding(16.dp).background(
+        modifier = modifier.padding(start = 16.dp, end = 16.dp, bottom = 30.dp).background(
             color = colorPlayerBack,
             shape = RoundedCornerShape(size = 12.dp)
         )

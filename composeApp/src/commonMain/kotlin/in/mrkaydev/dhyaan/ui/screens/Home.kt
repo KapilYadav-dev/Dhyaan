@@ -64,7 +64,7 @@ class Home : Screen {
 
                 Box(Modifier.fillMaxSize()) {
                     Image(
-                        painterResource("images/gradient-dark.jpeg"),
+                        painterResource("images/${Constants.wallPaperId}.jpeg"),
                         "bg",
                         Modifier.fillMaxSize(),
                         contentScale = if (platform == Constants.ANDROID) ContentScale.Crop else ContentScale.FillBounds
