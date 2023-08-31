@@ -152,7 +152,7 @@ internal fun App() {
                             "Pause"
                         } else {
                             "Start"
-                        }, isClicked = { true }, buttonClicked = {
+                        }, isClicked = { !timerRunning }, buttonClicked = {
                             if (timerRunning) {
                                 viewModel.pauseTimer()
                             } else if (timerFirstStarted) {
@@ -162,7 +162,7 @@ internal fun App() {
                                 timerFirstStarted = true
                             }
                             timerRunning = !timerRunning
-                        })
+                        }, isCtaButton = true)
                         Spacer(modifier = Modifier.width(32.dp))
                         Icon(
                             FeatherIcons.RefreshCcw,
