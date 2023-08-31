@@ -23,8 +23,8 @@ import compose.icons.feathericons.ChevronRight
 import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.theme.colorPlayerBack
 import `in`.mrkaydev.dhyaan.theme.colorWhite
+import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
-import `in`.mrkaydev.dhyaan.utils.Utils
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -84,7 +84,7 @@ fun MusicPlayer(modifier: Modifier, musicDataList: List<MusicPlayerData>,index:(
             Image(
                 modifier = Modifier.size(40.dp)
                     .clickable { isPlaying = !isPlaying },
-                painter = painterResource("images/${if (isPlaying) "pause" else "play"}.${if (platform == Utils.WEB) "png" else "xml"}"),
+                painter = painterResource("images/${if (isPlaying) "pause" else "play"}.${if (platform == Constants.WEB) "png" else "xml"}"),
                 contentDescription = "image description",
                 contentScale = ContentScale.FillBounds
             )

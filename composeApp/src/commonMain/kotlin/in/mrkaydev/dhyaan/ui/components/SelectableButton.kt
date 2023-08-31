@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import `in`.mrkaydev.dhyaan.theme.colorBlack
 import `in`.mrkaydev.dhyaan.theme.colorTransparent
 import `in`.mrkaydev.dhyaan.theme.colorWhite
+import `in`.mrkaydev.dhyaan.utils.Constants.buttonTextSize
+import `in`.mrkaydev.dhyaan.utils.Constants.buttonWidth
 import `in`.mrkaydev.dhyaan.utils.FontLoader
-import `in`.mrkaydev.dhyaan.utils.Utils.buttonTextSize
-import `in`.mrkaydev.dhyaan.utils.Utils.buttonWidth
 
 @Composable
 fun SelectableButton(

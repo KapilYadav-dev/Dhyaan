@@ -24,8 +24,8 @@ import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.HomeViewModel
 import `in`.mrkaydev.dhyaan.ui.components.MusicPlayer
 import `in`.mrkaydev.dhyaan.ui.components.SelectableButton
+import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
-import `in`.mrkaydev.dhyaan.utils.Utils
 import org.jetbrains.compose.resources.painterResource
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.DurationUnit
@@ -44,7 +44,7 @@ class Home:Screen {
         var timerFirstStarted by remember { mutableStateOf(false) }
         var timerRunning by remember { mutableStateOf(false) }
 
-        val initialTimeInMinutes by remember { mutableStateOf((Utils.POMODORO_TIME).minutes) }
+        val initialTimeInMinutes by remember { mutableStateOf((Constants.POMODORO_TIME).minutes) }
         val initialTime by remember { mutableStateOf(initialTimeInMinutes.toLong(DurationUnit.MILLISECONDS)) }
 
         when (homeUiState.value) {
@@ -63,12 +63,12 @@ class Home:Screen {
                         painterResource("images/gradient-dark.jpeg"),
                         "bg",
                         Modifier.fillMaxSize(),
-                        contentScale = if (platform == Utils.ANDROID) ContentScale.Crop else ContentScale.FillBounds
+                        contentScale = if (platform == Constants.ANDROID) ContentScale.Crop else ContentScale.FillBounds
                     )
-                    Column(Modifier.padding(start = 24.dp, top = 16.dp)) {
+                    Column(Modifier.padding(start = 24.dp, top = 48.dp)) {
                         Text(
-                            Utils.APP_NAME,
-                            fontSize = Utils.headerTitleTextSize,
+                            Constants.APP_NAME,
+                            fontSize = Constants.headerTitleTextSize,
                             fontFamily = FontLoader.appFont,
                             fontWeight = FontWeight.Bold,
                             color = colorWhite,
@@ -76,7 +76,7 @@ class Home:Screen {
                         )
                         Text(
                             "by mrkaydev",
-                            fontSize = Utils.headerDevTitleTextSize,
+                            fontSize = Constants.headerDevTitleTextSize,
                             fontFamily = FontLoader.appFont,
                             fontWeight = FontWeight.Light,
                             color = colorWhite,
@@ -86,7 +86,7 @@ class Home:Screen {
                     Image(
                         painterResource("images/setting.png"),
                         "",
-                        Modifier.padding(vertical = 30.dp, horizontal = 16.dp).size(Utils.settingSize)
+                        Modifier.padding(vertical = 64.dp, horizontal = 16.dp).size(Constants.settingSize)
                             .align(Alignment.TopEnd)
                     )
                     Column(Modifier.align(Alignment.Center).fillMaxWidth()) {
@@ -132,17 +132,17 @@ class Home:Screen {
                                 })
                             Spacer(Modifier.width(32.dp))
                         }
-                        Spacer(Modifier.height(Utils.verticalSpacer))
+                        Spacer(Modifier.height(Constants.verticalSpacer))
                         Text(
                             formattedTime,
-                            fontSize = Utils.timerTextSize,
+                            fontSize = Constants.timerTextSize,
                             fontFamily = FontLoader.appFont,
                             fontWeight = FontWeight.Bold,
                             color = colorWhite,
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center
                         )
-                        Spacer(Modifier.height(Utils.verticalSpacer))
+                        Spacer(Modifier.height(Constants.verticalSpacer))
                         Row(
                             Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center,
@@ -173,9 +173,9 @@ class Home:Screen {
                         }
                     }
                     MusicPlayer(
-                        modifier = Modifier.fillMaxWidth(if (platform == Utils.ANDROID || platform == Utils.IOS) 1f else 0.25f)
+                        modifier = Modifier.fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
                             .align(Alignment.BottomStart),
-                        Utils.musicList
+                        Constants.musicList
                     )
                 }
             }

@@ -5,10 +5,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import `in`.mrkaydev.dhyaan.theme.colorBlack
 import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.utils.FontLoader
-import `in`.mrkaydev.dhyaan.utils.Utils
 
 
 @Composable
@@ -29,7 +29,7 @@ fun CommonDialog(
             Button(onClick = { positiveButtonClicked() }) {
                 Text(
                     positiveText,
-                    fontSize = Utils.headerTitleTextSize,
+                    fontSize = 16.sp,
                     fontFamily = FontLoader.appFont,
                     fontWeight = FontWeight.Bold,
                     color = colorWhite
@@ -40,7 +40,7 @@ fun CommonDialog(
             Button(onClick = { negativeButtonClicked() }) {
                 Text(
                     negativeText,
-                    fontSize = Utils.headerTitleTextSize,
+                    fontSize = 16.sp,
                     fontFamily = FontLoader.appFont,
                     fontWeight = FontWeight.Bold,
                     color = colorWhite
@@ -50,7 +50,7 @@ fun CommonDialog(
         title = {
             Text(
                 title,
-                fontSize = Utils.headerTitleTextSize,
+                fontSize = 24.sp,
                 fontFamily = FontLoader.appFont,
                 fontWeight = FontWeight.Bold,
                 color = colorBlack
@@ -59,7 +59,7 @@ fun CommonDialog(
         text = {
             Text(
                 text,
-                fontSize = Utils.headerTitleTextSize,
+                fontSize = 20.sp,
                 fontFamily = FontLoader.appFont,
                 fontWeight = FontWeight.Normal,
                 color = colorBlack

@@ -5,11 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
-import cafe.adriel.voyager.core.screen.Screen
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import `in`.mrkaydev.dhyaan.data.HomeUiState
+import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
-import `in`.mrkaydev.dhyaan.utils.Utils
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,7 +21,7 @@ class HomeViewModel : ScreenModel {
     var isLongBreakSelected by mutableStateOf(false)
     var isShortBreakSelected by mutableStateOf(false)
 
-    private val _currentTime = MutableStateFlow((Utils.POMODORO_TIME).minutes.toLong(DurationUnit.MILLISECONDS))
+    private val _currentTime = MutableStateFlow((Constants.POMODORO_TIME).minutes.toLong(DurationUnit.MILLISECONDS))
     val currentTime: StateFlow<Long> = _currentTime.asStateFlow()
 
     private var timerJob: Job? = null

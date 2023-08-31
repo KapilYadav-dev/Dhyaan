@@ -13,7 +13,7 @@ internal actual fun openUrl(url: String?) {
     UIApplication.sharedApplication.openURL(nsUrl)
 }
 internal actual val platform: String
-    get() = Utils.IOS
+    get() = ConstantsIOS
 
 internal actual suspend fun loadPlatformFonts(): FontFamily {
     val fontPath = "fonts"
