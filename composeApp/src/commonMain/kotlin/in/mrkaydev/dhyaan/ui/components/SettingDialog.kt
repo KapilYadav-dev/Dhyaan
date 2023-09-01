@@ -18,6 +18,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import `in`.mrkaydev.dhyaan.theme.colorBlack
 import `in`.mrkaydev.dhyaan.theme.colorWhite
+import `in`.mrkaydev.dhyaan.ui.screens.*
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import org.jetbrains.compose.resources.painterResource
@@ -90,20 +91,18 @@ fun SettingDialog(onDismiss: () -> Unit) {
                     )
                     Column(Modifier.weight(0.65f)) {
                         when (selectSettingTitleIdx) {
-                            0-> {
-                                var selectedItem by remember { mutableStateOf("Select an item") }
-                                val items = listOf("Item 1", "Item 2", "Item 3")
-
-                                DropdownPicker(
-                                    items = items,
-                                    selectedItem = selectedItem,
-                                    onItemSelected = { selectedItem = it }
-                                )
+                            0 -> {
+                                GeneralSettings()
                             }
-                            1-> {
-
+                            1 -> {
+                                TimerSettings()
                             }
-
+                            2 -> {
+                                SoundSettings()
+                            }
+                            3 -> {
+                                AccountSettings()
+                            }
                         }
                     }
                     Spacer(Modifier.height(16.dp))

@@ -71,7 +71,7 @@ class Home : Screen {
 
                 Box(Modifier.fillMaxSize()) {
                     Image(
-                        painterResource("images/theme/${Constants.wallPaperId}.jpeg"),
+                        painterResource("images/theme/${Utils.settings.getString("theme",Constants.wallPaperId)}.jpeg"),
                         "bg",
                         Modifier.fillMaxSize(),
                         contentScale = if (platform == Constants.ANDROID) ContentScale.Crop else ContentScale.FillBounds

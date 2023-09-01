@@ -12,6 +12,7 @@ ktor = "2.3.3"
 composeIcons = "1.1.0"
 kotlinx-serialization = "1.5.1"
 kstore = "0.6.0"
+settings = "1.0.0"
 
 [libraries]
 
@@ -27,6 +28,7 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 composeIcons-featherIcons = { module = "br.com.devsrsouza.compose.icons:feather", version.ref = "composeIcons" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kstore = { module = "io.github.xxfast:kstore", version.ref = "kstore" }
+settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }
 
 [plugins]
 

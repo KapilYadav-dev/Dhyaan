@@ -61,6 +61,7 @@ kotlin {
                 implementation(libs.composeIcons.featherIcons)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kstore)
+                implementation(libs.settings)
             }
         }
 
