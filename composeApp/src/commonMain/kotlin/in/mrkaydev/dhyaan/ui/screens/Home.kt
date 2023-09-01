@@ -71,7 +71,7 @@ class Home : Screen {
 
                 Box(Modifier.fillMaxSize()) {
                     Image(
-                        painterResource("images/${Constants.wallPaperId}.jpeg"),
+                        painterResource("images/theme/${Constants.wallPaperId}.jpeg"),
                         "bg",
                         Modifier.fillMaxSize(),
                         contentScale = if (platform == Constants.ANDROID) ContentScale.Crop else ContentScale.FillBounds
@@ -95,7 +95,7 @@ class Home : Screen {
                         )
                     }
                     Image(
-                        painterResource("images/setting.png"),
+                        painterResource("images/ui/setting.png"),
                         "",
                         Modifier.padding(vertical = 64.dp, horizontal = 24.dp)
                             .size(Constants.settingSize)

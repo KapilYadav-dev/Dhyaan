@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -17,7 +16,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import compose.icons.FeatherIcons
 import `in`.mrkaydev.dhyaan.theme.colorBlack
 import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.utils.Constants
@@ -50,7 +48,7 @@ fun SettingDialog(onDismiss: () -> Unit) {
                         fontFamily = FontLoader.appFont,
                         fontWeight = FontWeight.Bold
                     )
-                    Image(painter = painterResource("images/close.png"),"",  modifier = Modifier.padding(32.dp).size(24.dp).clickable {
+                    Image(painter = painterResource("images/ui/close.png"),"",  modifier = Modifier.padding(32.dp).size(24.dp).clickable {
                         onDismiss()
                     })
                 }
@@ -91,14 +89,22 @@ fun SettingDialog(onDismiss: () -> Unit) {
                         color = colorWhite.copy(0.4f)
                     )
                     Column(Modifier.weight(0.65f)) {
-                        Text(
-                            "item",
-                            fontSize = Constants.settingOptionTitleText,
-                            color = colorWhite,
-                            modifier = Modifier.padding(start = 24.dp, top = 16.dp, bottom = 16.dp),
-                            fontFamily = FontLoader.appFont,
-                            fontWeight = FontWeight.Medium
-                        )
+                        when (selectSettingTitleIdx) {
+                            0-> {
+                                var selectedItem by remember { mutableStateOf("Select an item") }
+                                val items = listOf("Item 1", "Item 2", "Item 3")
+
+                                DropdownPicker(
+                                    items = items,
+                                    selectedItem = selectedItem,
+                                    onItemSelected = { selectedItem = it }
+                                )
+                            }
+                            1-> {
+
+                            }
+
+                        }
                     }
                     Spacer(Modifier.height(16.dp))
                 }

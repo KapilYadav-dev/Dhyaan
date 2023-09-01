@@ -18,7 +18,7 @@ object Constants {
     const val BREAK_TIMER_SHORT: Int = 1
     const val POMODORO_SERIES_FREQUENCY: Int = 4
 
-    const val wallPaperId: String = "gradient-light"
+    const val wallPaperId: String = "tokiyo"
     const val POMODORO_TIME_KEY: String = "POMODORO_TIME"
     const val BREAK_TIMER_LONG_KEY: String = "BREAK_TIMER_LONG"
     const val BREAK_TIMER_SHORT_KEY: String = "BREAK_TIMER_SHORT"

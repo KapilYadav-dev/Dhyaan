@@ -9,7 +9,6 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -50,7 +49,7 @@ fun CommonDialog(title:String,description:String,ctaButtonText:String, onDismiss
                     ) {
 
                     Image(
-                        painter = painterResource("images/yoga.jpg"),
+                        painter = painterResource("images/theme/yoga.jpg"),
                         contentDescription = "",
                         modifier = Modifier.fillMaxWidth().fillMaxHeight(0.9f),
                         contentScale = ContentScale.Inside

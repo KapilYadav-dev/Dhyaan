@@ -10,7 +10,7 @@ object Utils {
     }
 
     val musicList = listOf(
-        MusicPlayerData("Peaceful Garden", "by Harumachi Music", "ocean","sounds/audio_one.mp3","audio_one"),
-        MusicPlayerData("River with faraway bird sounds", "by ValentineSeasons", "tokiyo","sounds/audio_two.mp3","audio_two")
+        MusicPlayerData("Peaceful Garden", "by Harumachi Music", "theme/ocean","sounds/audio_one.mp3","audio_one"),
+        MusicPlayerData("River with faraway bird sounds", "by ValentineSeasons", "theme/tokiyo","sounds/audio_two.mp3","audio_two")
     )
 }

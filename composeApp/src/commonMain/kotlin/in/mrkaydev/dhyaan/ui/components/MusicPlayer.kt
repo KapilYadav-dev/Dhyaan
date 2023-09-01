@@ -112,7 +112,7 @@ fun MusicPlayer(
                             viewModel.pauseAudio()
                         }
                     },
-                painter = painterResource("images/${if (isPlaying) "pause" else "play"}.${if (platform == Constants.WEB) "png" else "xml"}"),
+                painter = painterResource("images/ui/${if (isPlaying) "pause" else "play"}.${if (platform == Constants.WEB) "png" else "xml"}"),
                 contentDescription = "image description",
                 contentScale = ContentScale.FillBounds
             )
