@@ -26,6 +26,7 @@ import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.viewmodels.HomeViewModel
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.recomposeHighlighter
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -51,14 +52,14 @@ fun MusicPlayer(
     }
 
     Box(
-        modifier = modifier.padding(start = 16.dp, end = 16.dp, bottom = 30.dp).background(
+        modifier = modifier.recomposeHighlighter().padding(start = 16.dp, end = 16.dp, bottom = 30.dp).background(
             color = colorPlayerBack,
             shape = RoundedCornerShape(size = 12.dp)
         )
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
-                modifier = Modifier.size(72.dp).padding(12.dp).clip(RoundedCornerShape(12.dp)),
+                modifier = Modifier.recomposeHighlighter().size(72.dp).padding(12.dp).clip(RoundedCornerShape(12.dp)),
                 painter = painterResource("images/${musicState.image}.jpeg"),
                 contentDescription = "image description",
                 contentScale = ContentScale.FillBounds
@@ -85,14 +86,14 @@ fun MusicPlayer(
             }
         }
         Row(
-            Modifier.padding(end = 24.dp).align(Alignment.CenterEnd),
+            Modifier.recomposeHighlighter().padding(end = 24.dp).align(Alignment.CenterEnd),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = FeatherIcons.ChevronLeft,
                 "left",
                 tint = colorWhite,
-                modifier = Modifier.size(32.dp).clickable {
+                modifier = Modifier.recomposeHighlighter().size(32.dp).clickable {
                     currentIndex = (currentIndex - 1 + musicDataList.size) % musicDataList.size
                     isPlaying = true
                     index(currentIndex)
@@ -100,7 +101,7 @@ fun MusicPlayer(
                 }
             )
             Image(
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier.size(40.dp).recomposeHighlighter()
                     .clickable {
                         isPlaying = !isPlaying
                         if(isPlaying && viewModel.isAnyAudioPlaying) {
@@ -120,7 +121,7 @@ fun MusicPlayer(
                 imageVector = FeatherIcons.ChevronRight,
                 "right",
                 tint = colorWhite,
-                modifier = Modifier.size(32.dp).clickable {
+                modifier = Modifier.recomposeHighlighter().size(32.dp).clickable {
                     currentIndex = (currentIndex + 1) % musicDataList.size
                     isPlaying = true
                     index(currentIndex)
