@@ -27,17 +27,18 @@ import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.utils.Constants.buttonTextSize
 import `in`.mrkaydev.dhyaan.utils.Constants.buttonWidth
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.recomposeHighlighter
 
 @Composable
 fun SelectableButton(
-    text: String,
-    isCtaButton: Boolean = false,
+    text:() -> String,
+    isCtaButton: () -> Boolean = { false },
     isClicked: () -> Boolean,
     buttonClicked: () -> Unit
 ) {
     val bgColor: State<Color>?
     val textColor: State<Color>?
-    if (isCtaButton) {
+    if (isCtaButton()) {
         bgColor = animateColorAsState(
             if (isClicked()) colorWhite else colorBlack,
             animationSpec = tween(1000, easing = LinearEasing)
@@ -53,19 +54,19 @@ fun SelectableButton(
 
 
     Box(
-        modifier = Modifier.then(
-            if (!isCtaButton) {
-                Modifier.border(2.dp, colorWhite, RoundedCornerShape(32.dp))
-            } else Modifier
+        modifier = Modifier.recomposeHighlighter().then(
+            if (!isCtaButton()) {
+                Modifier.recomposeHighlighter().border(2.dp, colorWhite, RoundedCornerShape(32.dp))
+            } else Modifier.recomposeHighlighter()
         ).defaultMinSize(buttonWidth).clip(RoundedCornerShape(32.dp))
             .background(bgColor.value)
             .clickable {
-                if(isCtaButton) buttonClicked()
+                if(isCtaButton()) buttonClicked()
             }
     ) {
         Text(
-            text = text,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+            text = text(),
+            modifier = Modifier.recomposeHighlighter().padding(horizontal = 16.dp, vertical = 12.dp)
                 .align(Alignment.Center),
             style = TextStyle(
                 fontSize = buttonTextSize,

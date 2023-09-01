@@ -21,6 +21,7 @@ import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.screens.*
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.recomposeHighlighter
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -35,40 +36,40 @@ fun SettingDialog(onDismiss: () -> Unit) {
     ) {
         Card(
             shape = RoundedCornerShape(10.dp),
-            modifier = Modifier
+            modifier = Modifier.recomposeHighlighter()
                 .fillMaxWidth()
                 .padding(vertical = 24.dp)
         ) {
-            Column(modifier = Modifier.fillMaxWidth().background(colorBlack)) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Column(modifier = Modifier.recomposeHighlighter().fillMaxWidth().background(colorBlack)) {
+                Row(modifier = Modifier.recomposeHighlighter().fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(
                         "settings",
                         fontSize = Constants.settingHeaderText,
                         color = colorWhite,
-                        modifier = Modifier.padding(24.dp),
+                        modifier = Modifier.recomposeHighlighter().padding(24.dp),
                         fontFamily = FontLoader.appFont,
                         fontWeight = FontWeight.Bold
                     )
-                    Image(painter = painterResource("images/ui/close.png"),"",  modifier = Modifier.padding(32.dp).size(24.dp).clickable {
+                    Image(painter = painterResource("images/ui/close.png"),"",  modifier = Modifier.recomposeHighlighter().padding(32.dp).size(24.dp).clickable {
                         onDismiss()
                     })
                 }
                 Divider(
                     thickness = 1.dp,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.recomposeHighlighter().fillMaxWidth(),
                     color = colorWhite.copy(0.4f)
                 )
-                Row(Modifier.fillMaxWidth().fillMaxHeight(0.5f)) {
-                    LazyColumn(Modifier.weight(0.34f)) {
+                Row(Modifier.recomposeHighlighter().fillMaxWidth().fillMaxHeight(0.5f)) {
+                    LazyColumn(Modifier.recomposeHighlighter().weight(0.34f)) {
                         itemsIndexed(settingsItem) { idx, item ->
-                            Column(modifier = Modifier.clickable {
+                            Column(modifier = Modifier.recomposeHighlighter().clickable {
                                 selectSettingTitleIdx = idx
                             }) {
                                 Text(
                                     item,
                                     fontSize = Constants.settingOptionTitleText,
                                     color = colorWhite,
-                                    modifier = Modifier.padding(
+                                    modifier = Modifier.recomposeHighlighter().padding(
                                         start = 24.dp,
                                         top = 16.dp,
                                         bottom = 16.dp
@@ -78,7 +79,7 @@ fun SettingDialog(onDismiss: () -> Unit) {
                                 )
                                 if (selectSettingTitleIdx == idx) Divider(
                                     thickness = 2.dp,
-                                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                                    modifier = Modifier.recomposeHighlighter().fillMaxWidth().padding(horizontal = 16.dp),
                                     color = colorWhite
                                 )
                             }
@@ -86,10 +87,10 @@ fun SettingDialog(onDismiss: () -> Unit) {
                     }
                     Divider(
                         thickness = 1.dp,
-                        modifier = Modifier.fillMaxHeight().weight(0.002f),
+                        modifier = Modifier.recomposeHighlighter().fillMaxHeight().weight(0.002f),
                         color = colorWhite.copy(0.4f)
                     )
-                    Column(Modifier.weight(0.65f)) {
+                    Column(Modifier.recomposeHighlighter().weight(0.65f)) {
                         when (selectSettingTitleIdx) {
                             0 -> {
                                 GeneralSettings()
@@ -105,23 +106,23 @@ fun SettingDialog(onDismiss: () -> Unit) {
                             }
                         }
                     }
-                    Spacer(Modifier.height(16.dp))
+                    Spacer(Modifier.recomposeHighlighter().height(16.dp))
                 }
                 Divider(
                     thickness = 1.dp,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.recomposeHighlighter().fillMaxWidth(),
                     color = colorWhite.copy(0.4f)
                 )
                 Row(
-                    Modifier.fillMaxWidth().padding(vertical = 16.dp),
+                    Modifier.recomposeHighlighter().fillMaxWidth().padding(vertical = 16.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    SelectableButton("close", true, { false }, {
+                    SelectableButton({"close"}, { true }, { false }) {
                         onDismiss()
-                    })
-                    SelectableButton("save", true, { true }, {
+                    }
+                    SelectableButton({ "save" }, { true }, { true }) {
 
-                    })
+                    }
                 }
             }
         }

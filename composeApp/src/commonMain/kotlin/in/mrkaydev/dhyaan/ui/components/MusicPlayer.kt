@@ -26,19 +26,20 @@ import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.viewmodels.HomeViewModel
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.Utils
 import `in`.mrkaydev.dhyaan.utils.recomposeHighlighter
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MusicPlayer(
     modifier: Modifier,
-    musicDataList: List<MusicPlayerData>,
     viewModel : HomeViewModel,
     index: (Int) -> Unit = {}
 ) {
     var isPlaying by remember { mutableStateOf(false) }
     var currentIndex by remember { mutableStateOf(0) }
-    val musicState = musicDataList[currentIndex]
+    val items by remember { mutableStateOf(Utils.musicList) }
+    val musicState = items[currentIndex]
     val maxChars = 20
     val title = if (musicState.title.length > maxChars) {
         "${musicState.title.substring(0, maxChars)}..."
@@ -50,6 +51,7 @@ fun MusicPlayer(
     } else {
         musicState.description
     }
+
 
     Box(
         modifier = modifier.recomposeHighlighter().padding(start = 16.dp, end = 16.dp, bottom = 30.dp).background(
@@ -94,7 +96,7 @@ fun MusicPlayer(
                 "left",
                 tint = colorWhite,
                 modifier = Modifier.recomposeHighlighter().size(32.dp).clickable {
-                    currentIndex = (currentIndex - 1 + musicDataList.size) % musicDataList.size
+                    currentIndex = (currentIndex - 1 + items.size) % items.size
                     isPlaying = true
                     index(currentIndex)
                     viewModel.playAudio(currentIndex)
@@ -122,7 +124,7 @@ fun MusicPlayer(
                 "right",
                 tint = colorWhite,
                 modifier = Modifier.recomposeHighlighter().size(32.dp).clickable {
-                    currentIndex = (currentIndex + 1) % musicDataList.size
+                    currentIndex = (currentIndex + 1) % items.size
                     isPlaying = true
                     index(currentIndex)
                     viewModel.playAudio(currentIndex)

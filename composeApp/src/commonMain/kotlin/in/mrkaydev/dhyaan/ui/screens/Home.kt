@@ -37,6 +37,7 @@ import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import `in`.mrkaydev.dhyaan.utils.Utils
 import `in`.mrkaydev.dhyaan.utils.Utils.formatTime
+import `in`.mrkaydev.dhyaan.utils.recomposeHighlighter
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 
@@ -69,14 +70,14 @@ class Home : Screen {
                 val minutes = seconds / 60
                 val formattedTime = formatTime(minutes, seconds % 60)
 
-                Box(Modifier.fillMaxSize()) {
+                Box(Modifier.recomposeHighlighter().fillMaxSize()) {
                     Image(
                         painterResource("images/theme/${Utils.settings.getString("theme",Constants.wallPaperId)}.jpeg"),
                         "bg",
-                        Modifier.fillMaxSize(),
+                        Modifier.recomposeHighlighter().fillMaxSize(),
                         contentScale = if (platform == Constants.ANDROID) ContentScale.Crop else ContentScale.FillBounds
                     )
-                    Column(Modifier.padding(start = 24.dp, top = 48.dp)) {
+                    Column(Modifier.recomposeHighlighter().padding(start = 24.dp, top = 48.dp)) {
                         Text(
                             Constants.APP_NAME,
                             fontSize = Constants.headerTitleTextSize,
@@ -97,64 +98,64 @@ class Home : Screen {
                     Image(
                         painterResource("images/ui/setting.png"),
                         "",
-                        Modifier.padding(vertical = 64.dp, horizontal = 24.dp)
+                        Modifier.recomposeHighlighter().padding(vertical = 64.dp, horizontal = 24.dp)
                             .size(Constants.settingSize)
                             .align(Alignment.TopEnd)
                             .clickable {
                                 isSettingOpened = true
                             }
                     )
-                    Column(Modifier.align(Alignment.Center).fillMaxWidth()) {
+                    Column(Modifier.recomposeHighlighter().align(Alignment.Center).fillMaxWidth()) {
                         Row(
-                            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                            Modifier.recomposeHighlighter().fillMaxWidth().horizontalScroll(rememberScrollState()),
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Spacer(Modifier.width(32.dp))
+                            Spacer(Modifier.recomposeHighlighter().width(32.dp))
                             SelectableButton(
-                                text = "pomodoro",
-                                isClicked = { viewModel.isPomodoroSelected },
-                                buttonClicked = {
-                                    viewModel.isPomodoroSelectedActions()
-                                })
+                                text = { "pomodoro" },
+                                isClicked = { viewModel.isPomodoroSelected }
+                            ) {
+                                viewModel.isPomodoroSelectedActions()
+                            }
 
-                            Spacer(Modifier.width(16.dp))
+                            Spacer(Modifier.recomposeHighlighter().width(16.dp))
                             SelectableButton(
-                                text = "short break",
-                                isClicked = { viewModel.isShortBreakSelected },
-                                buttonClicked = {
-                                    viewModel.isShortBreakSelectedActions()
-                                })
+                                text = { "short break" },
+                                isClicked = { viewModel.isShortBreakSelected }
+                            ) {
+                                viewModel.isShortBreakSelectedActions()
+                            }
 
-                            Spacer(Modifier.width(16.dp))
+                            Spacer(Modifier.recomposeHighlighter().width(16.dp))
                             SelectableButton(
-                                text = "long break",
-                                isClicked = { viewModel.isLongBreakSelected },
-                                buttonClicked = {
-                                    viewModel.isLongBreakSelectedActions()
-                                })
-                            Spacer(Modifier.width(32.dp))
+                                text = { "long break" },
+                                isClicked = { viewModel.isLongBreakSelected }
+                            ) {
+                                viewModel.isLongBreakSelectedActions()
+                            }
+                            Spacer(Modifier.recomposeHighlighter().width(32.dp))
                         }
-                        Spacer(Modifier.height(Constants.verticalSpacer))
+                        Spacer(Modifier.recomposeHighlighter().height(Constants.verticalSpacer))
                         Text(
                             formattedTime,
                             fontSize = Constants.timerTextSize,
                             fontFamily = FontLoader.appFont,
                             fontWeight = FontWeight.Bold,
                             color = colorWhite,
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier.recomposeHighlighter().fillMaxWidth(),
                             textAlign = TextAlign.Center
                         )
-                        Spacer(Modifier.height(Constants.verticalSpacer))
+                        Spacer(Modifier.recomposeHighlighter().height(Constants.verticalSpacer))
                         Row(
-                            Modifier.fillMaxWidth(),
+                            Modifier.recomposeHighlighter().fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             SelectableButton(text = if (timerRunning) {
-                                "Pause"
+                                { "Pause" }
                             } else {
-                                "Start"
+                                { "Start" }
                             }, isClicked = { !timerRunning }, buttonClicked = {
                                 if (timerRunning) {
                                     viewModel.pauseTimer()
@@ -165,14 +166,14 @@ class Home : Screen {
                                     timerFirstStarted = true
                                 }
                                 timerRunning = !timerRunning
-                            }, isCtaButton = true
+                            }, isCtaButton = { true }
                             )
-                            Spacer(modifier = Modifier.width(32.dp))
+                            Spacer(modifier = Modifier.recomposeHighlighter().width(32.dp))
                             Icon(
                                 FeatherIcons.RefreshCcw,
                                 "",
                                 tint = colorWhite,
-                                modifier = Modifier.size(32.dp).clickable {
+                                modifier = Modifier.recomposeHighlighter().size(32.dp).clickable {
                                     scope.launch {
                                         rotationState.animateTo(
                                             targetValue = rotationState.targetValue + 360f,
@@ -184,15 +185,14 @@ class Home : Screen {
                         }
                     }
                     MusicPlayer(
-                        modifier = Modifier.fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
+                        modifier = Modifier.recomposeHighlighter().fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
                             .align(Alignment.BottomStart),
-                        Utils.musicList,
                         viewModel
                     )
                     if (platform == Constants.WEB) Icon(
                         FeatherIcons.Monitor,
                         "",
-                        modifier = Modifier.padding(32.dp).size(32.dp).align(Alignment.BottomEnd)
+                        modifier = Modifier.recomposeHighlighter().padding(32.dp).size(32.dp).align(Alignment.BottomEnd)
                             .clickable {
                                 showFullScreenWebOnly()
                             },

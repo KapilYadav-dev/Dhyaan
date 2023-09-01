@@ -20,6 +20,7 @@ import `in`.mrkaydev.dhyaan.theme.colorBlack
 import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.recomposeHighlighter
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -66,15 +67,15 @@ fun CommonDialog(title:String,description:String,ctaButtonText:String, onDismiss
 
                 Text(
                     text = description,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                    modifier = Modifier.recomposeHighlighter().padding(horizontal = 16.dp, vertical = 4.dp),
                     fontFamily = FontLoader.appFont,
                     fontWeight = FontWeight.Medium,
                 )
 
-                Row(Modifier.padding(top = 8.dp, start = 24.dp,end=24.dp)) {
+                Row(Modifier.recomposeHighlighter().padding(top = 8.dp, start = 24.dp,end=24.dp)) {
                     OutlinedButton(
                         onClick = { onDismiss() },
-                        Modifier
+                        Modifier.recomposeHighlighter()
                             .fillMaxWidth()
                             .padding(8.dp)
                             .weight(1F)

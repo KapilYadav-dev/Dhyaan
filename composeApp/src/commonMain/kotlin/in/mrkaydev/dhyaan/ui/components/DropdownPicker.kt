@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.ChevronDown
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.recomposeHighlighter
 
 @Composable
 fun DropdownPicker(
@@ -30,13 +31,13 @@ fun DropdownPicker(
     var expanded by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
+        modifier = Modifier.recomposeHighlighter()
             .fillMaxWidth()
             .padding(16.dp)
             .clip(RoundedCornerShape(12.dp))
     ) {
         Box(
-            modifier = Modifier
+            modifier = Modifier.recomposeHighlighter()
                 .fillMaxWidth()
                 .clickable { expanded = true }
         ) {
@@ -48,7 +49,7 @@ fun DropdownPicker(
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 ),
-                modifier = Modifier
+                modifier = Modifier.recomposeHighlighter()
                     .fillMaxWidth()
                     .background(MaterialTheme.colorScheme.background)
                     .padding(16.dp)
@@ -57,7 +58,7 @@ fun DropdownPicker(
                 imageVector = FeatherIcons.ChevronDown,
                 contentDescription = null,
                 tint = Color.Gray,
-                modifier = Modifier
+                modifier = Modifier.recomposeHighlighter()
                     .align(Alignment.CenterEnd)
                     .padding(8.dp)
             )
