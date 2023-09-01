@@ -27,7 +27,7 @@ import `in`.mrkaydev.dhyaan.data.HomeUiState
 import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.showFullScreenWebOnly
 import `in`.mrkaydev.dhyaan.theme.colorWhite
-import `in`.mrkaydev.dhyaan.ui.HomeViewModel
+import `in`.mrkaydev.dhyaan.ui.viewmodels.HomeViewModel
 import `in`.mrkaydev.dhyaan.ui.components.CommonDialog
 import `in`.mrkaydev.dhyaan.ui.components.MusicPlayer
 import `in`.mrkaydev.dhyaan.ui.components.SelectableButton
@@ -207,9 +207,9 @@ class Home : Screen {
                         "Let's focus"
                     }
                     val description = if (data == Constants.POMODORO_TIME_KEY) {
-                        "Hurray you done your ${Constants.POMODORO_TIME} minutes of dhyaan app. Now its time for a break. You earned it."
+                        Constants.breakDescription
                     } else {
-                        "let's get back to work again..."
+                        Constants.focusDescription
                     }
                     CommonDialog(
                         title = title,

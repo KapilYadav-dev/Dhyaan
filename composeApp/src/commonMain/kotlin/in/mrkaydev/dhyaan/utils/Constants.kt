@@ -23,7 +23,11 @@ object Constants {
     const val BREAK_TIMER_LONG_KEY: String = "BREAK_TIMER_LONG"
     const val BREAK_TIMER_SHORT_KEY: String = "BREAK_TIMER_SHORT"
 
+    const val breakDescription: String = "Congratulations, you've completed your $POMODORO_TIME minutes of mindfulness meditation on the app. Now, it's time to take a well-deserved break. Enjoy!"
+    const val focusDescription: String = "Let's refocus and get back to work again..."
 
+
+    val imageDialogHeight = if (platform == WEB || platform == DESKTOP) 240.dp else 160.dp
     val buttonWidth = if (platform == WEB || platform == DESKTOP) 160.dp else 120.dp
     val verticalSpacer = if (platform == WEB || platform == DESKTOP) 56.dp else 24.dp
     val settingSize = if (platform == WEB || platform == DESKTOP) 24.dp else 20.dp

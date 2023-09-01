@@ -23,7 +23,7 @@ import compose.icons.feathericons.ChevronRight
 import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.theme.colorPlayerBack
 import `in`.mrkaydev.dhyaan.theme.colorWhite
-import `in`.mrkaydev.dhyaan.ui.HomeViewModel
+import `in`.mrkaydev.dhyaan.ui.viewmodels.HomeViewModel
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import org.jetbrains.compose.resources.painterResource

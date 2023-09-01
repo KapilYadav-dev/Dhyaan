@@ -1,4 +1,4 @@
-package `in`.mrkaydev.dhyaan.ui
+package `in`.mrkaydev.dhyaan.ui.viewmodels
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,7 +26,7 @@ class HomeViewModel : ScreenModel {
     var isPomodoroSelected by mutableStateOf(true)
     var isLongBreakSelected by mutableStateOf(false)
     var isShortBreakSelected by mutableStateOf(false)
-    var showDialogForInstruction by mutableStateOf(false)
+    var showDialogForInstruction by mutableStateOf(true)
     var timerType by mutableStateOf("")
 
     private val _currentTime = MutableStateFlow((Constants.POMODORO_TIME).minutes.toLong(DurationUnit.MILLISECONDS))
