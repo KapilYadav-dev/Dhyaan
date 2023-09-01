@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun MusicPlayer(
     modifier: Modifier,
-    viewModel : HomeViewModel,
+    viewModel: () -> HomeViewModel,
     index: (Int) -> Unit = {}
 ) {
     var isPlaying by remember { mutableStateOf(false) }
@@ -99,20 +99,20 @@ fun MusicPlayer(
                     currentIndex = (currentIndex - 1 + items.size) % items.size
                     isPlaying = true
                     index(currentIndex)
-                    viewModel.playAudio(currentIndex)
+                    viewModel().playAudio(currentIndex)
                 }
             )
             Image(
                 modifier = Modifier.size(40.dp).recomposeHighlighter()
                     .clickable {
                         isPlaying = !isPlaying
-                        if(isPlaying && viewModel.isAnyAudioPlaying) {
-                            viewModel.resumeAudio()
+                        if(isPlaying && viewModel().isAnyAudioPlaying) {
+                            viewModel().resumeAudio()
                         } else if(isPlaying) {
-                            viewModel.isAnyAudioPlaying=true
-                            viewModel.playAudio(0)
+                            viewModel().isAnyAudioPlaying=true
+                            viewModel().playAudio(0)
                         } else {
-                            viewModel.pauseAudio()
+                            viewModel().pauseAudio()
                         }
                     },
                 painter = painterResource("images/ui/${if (isPlaying) "pause" else "play"}.${if (platform == Constants.WEB) "png" else "xml"}"),
@@ -127,7 +127,7 @@ fun MusicPlayer(
                     currentIndex = (currentIndex + 1) % items.size
                     isPlaying = true
                     index(currentIndex)
-                    viewModel.playAudio(currentIndex)
+                    viewModel().playAudio(currentIndex)
                 }
             )
         }

@@ -28,11 +28,8 @@ import `in`.mrkaydev.dhyaan.data.HomeUiState
 import `in`.mrkaydev.dhyaan.platform
 import `in`.mrkaydev.dhyaan.showFullScreenWebOnly
 import `in`.mrkaydev.dhyaan.theme.colorWhite
+import `in`.mrkaydev.dhyaan.ui.components.*
 import `in`.mrkaydev.dhyaan.ui.viewmodels.HomeViewModel
-import `in`.mrkaydev.dhyaan.ui.components.CommonDialog
-import `in`.mrkaydev.dhyaan.ui.components.MusicPlayer
-import `in`.mrkaydev.dhyaan.ui.components.SelectableButton
-import `in`.mrkaydev.dhyaan.ui.components.SettingDialog
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import `in`.mrkaydev.dhyaan.utils.Utils
@@ -77,7 +74,7 @@ class Home : Screen {
                         Modifier.recomposeHighlighter().fillMaxSize(),
                         contentScale = if (platform == Constants.ANDROID) ContentScale.Crop else ContentScale.FillBounds
                     )
-                    Column(Modifier.recomposeHighlighter().padding(start = 24.dp, top = 48.dp)) {
+                    ColumnComposed(Modifier.recomposeHighlighter().padding(start = 24.dp, top = 48.dp)) {
                         Text(
                             Constants.APP_NAME,
                             fontSize = Constants.headerTitleTextSize,
@@ -95,21 +92,21 @@ class Home : Screen {
                             textAlign = TextAlign.Center
                         )
                     }
-                    Image(
-                        painterResource("images/ui/setting.png"),
-                        "",
-                        Modifier.recomposeHighlighter().padding(vertical = 64.dp, horizontal = 24.dp)
-                            .size(Constants.settingSize)
-                            .align(Alignment.TopEnd)
-                            .clickable {
-                                isSettingOpened = true
-                            }
-                    )
-                    Column(Modifier.recomposeHighlighter().align(Alignment.Center).fillMaxWidth()) {
-                        Row(
+                    ColumnComposed(Modifier.align(Alignment.TopEnd)){
+                        Image(
+                            painterResource("images/ui/setting.png"),
+                            "",
+                            Modifier.recomposeHighlighter().padding(vertical = 64.dp, horizontal = 24.dp)
+                                .size(Constants.settingSize)
+                                .align(Alignment.TopEnd)
+                                .clickable {
+                                    isSettingOpened = true
+                                }
+                        )
+                    }
+                    ColumnComposed(Modifier.recomposeHighlighter().align(Alignment.Center).fillMaxWidth()) {
+                        RowComposed(
                             Modifier.recomposeHighlighter().fillMaxWidth().horizontalScroll(rememberScrollState()),
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Spacer(Modifier.recomposeHighlighter().width(32.dp))
                             SelectableButton(
@@ -147,10 +144,8 @@ class Home : Screen {
                             textAlign = TextAlign.Center
                         )
                         Spacer(Modifier.recomposeHighlighter().height(Constants.verticalSpacer))
-                        Row(
+                        RowComposed(
                             Modifier.recomposeHighlighter().fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             SelectableButton(text = if (timerRunning) {
                                 { "Pause" }
@@ -184,11 +179,14 @@ class Home : Screen {
                             )
                         }
                     }
-                    MusicPlayer(
-                        modifier = Modifier.recomposeHighlighter().fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
-                            .align(Alignment.BottomStart),
-                        viewModel
-                    )
+                    ColumnComposed(Modifier.align(Alignment.BottomStart)) {
+                        MusicPlayer(
+                            modifier = Modifier.recomposeHighlighter().fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
+                                .align(Alignment.BottomStart),
+                            { viewModel }
+                        )
+                    }
+
                     if (platform == Constants.WEB) Icon(
                         FeatherIcons.Monitor,
                         "",
