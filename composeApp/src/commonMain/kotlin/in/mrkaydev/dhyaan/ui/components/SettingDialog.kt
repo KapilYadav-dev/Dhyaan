@@ -21,6 +21,7 @@ import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.screens.*
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
+import `in`.mrkaydev.dhyaan.utils.Utils.settingsItem
 import `in`.mrkaydev.dhyaan.utils.recomposeHighlighter
 import org.jetbrains.compose.resources.painterResource
 
@@ -117,18 +118,11 @@ fun SettingDialog(onDismiss: () -> Unit) {
                     Modifier.recomposeHighlighter().fillMaxWidth().padding(vertical = 16.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    SelectableButton({"close"}, { true }, { false }) {
+                    SelectableButton({"close"}, { true }, { true }) {
                         onDismiss()
-                    }
-                    SelectableButton({ "save" }, { true }, { true }) {
-
                     }
                 }
             }
         }
     }
 }
-
-val settingsItem = listOf(
-    "general", "timers", "sounds", "account"
-)

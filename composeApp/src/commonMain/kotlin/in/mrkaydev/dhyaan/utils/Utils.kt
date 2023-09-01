@@ -30,6 +30,10 @@ object Utils {
         return "$formattedMinutes:$formattedSeconds"
     }
 
+    val settingsItem = listOf(
+        "general", "timers", "account"
+    )
+
     val musicList = listOf(
         MusicPlayerData(
             "Peaceful Garden",
@@ -62,9 +66,6 @@ object Utils {
 @Stable
 fun Modifier.recomposeHighlighter(): Modifier =
     this.then(if (Constants.RECOMPOSER_ENABLED) recomposeModifier else Modifier)
-
-// Use a single instance + @Stable to ensure that recompositions can enable skipping optimizations
-// Modifier.composed will still remember unique data per call site.
 private val recomposeModifier =
     Modifier.composed(inspectorInfo = debugInspectorInfo { name = "recomposeHighlighter" }) {
         // The total number of compositions that have occurred. We're not using a State<> here be
