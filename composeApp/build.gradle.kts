@@ -146,8 +146,22 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "in.mrkaydev.dhyaan.desktopApp"
+            packageName = "Dhyaan"
             packageVersion = "1.0.0"
+            description = "Dhyaan - A mindful app"
+            copyright = "© 2023 Kapil Yadav. All rights reserved."
+            includeAllModules = true
+
+            val iconsRoot = project.file("src/commonMain/resources/images/app/")
+            macOS {
+                iconFile.set(iconsRoot.resolve("icon.icns"))
+            }
+            windows {
+                iconFile.set(iconsRoot.resolve("icon.ico"))
+            }
+            linux {
+                iconFile.set(iconsRoot.resolve("icon.png"))
+            }
         }
     }
 }

@@ -3,7 +3,8 @@
 
     <application
         android:name=".AndroidApp"
-        android:icon="@android:drawable/ic_menu_compass"
+        android:icon="@drawable/icon"
+        android:roundIcon="@drawable/icon"
         android:label="Dhyaan"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
