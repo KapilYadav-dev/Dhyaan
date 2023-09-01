@@ -47,7 +47,7 @@ object Utils {
         )
     )
     val themeList = listOf(
-        "desert", "mountain", "ocean", "snow", "tokiyo", "gradient-light", "gradient-dark"
+        "desert", "mountain", "ocean", "snow", "tokiyo", "gradient-light", "gradient-dark" ,"yellow-forest"
     ).sorted()
 
     val pomodoroList = listOf(
