@@ -33,12 +33,12 @@ kotlin {
 
     cocoapods {
         version = "1.0.0"
-        summary = "Compose application framework"
+        summary = "Dhyaan - A mindful app"
         homepage = "empty"
         ios.deploymentTarget = "11.0"
         podfile = project.file("../iosApp/Podfile")
         framework {
-            baseName = "ComposeApp"
+            baseName = "Dhyaan"
             isStatic = true
         }
     }
