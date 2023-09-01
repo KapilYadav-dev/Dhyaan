@@ -56,15 +56,11 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
                 implementation(libs.voyager.navigator)
-                implementation(libs.napier)
                 implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.insetsx)
                 implementation(libs.ktor.core)
                 implementation(libs.composeIcons.featherIcons)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kstore)
-                implementation(libs.moko.mvvm.core)
-                implementation(libs.moko.mvvm.compose)
             }
         }
 
