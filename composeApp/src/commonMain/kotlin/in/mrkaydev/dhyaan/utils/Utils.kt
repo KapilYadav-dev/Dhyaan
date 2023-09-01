@@ -1,7 +1,5 @@
 package `in`.mrkaydev.dhyaan.utils
 
-import com.russhwolf.settings.Settings
-import `in`.mrkaydev.dhyaan.ui.components.MusicPlayerData
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +16,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.unit.dp
+import com.russhwolf.settings.Settings
+import `in`.mrkaydev.dhyaan.ui.components.MusicPlayerData
 import kotlinx.coroutines.delay
 import kotlin.math.min
 
@@ -31,16 +31,37 @@ object Utils {
     }
 
     val musicList = listOf(
-        MusicPlayerData("Peaceful Garden", "by Harumachi Music", "theme/ocean","sounds/audio_one.mp3","audio_one"),
-        MusicPlayerData("River with faraway bird sounds", "by ValentineSeasons", "theme/tokiyo","sounds/audio_two.mp3","audio_two")
+        MusicPlayerData(
+            "Peaceful Garden",
+            "by Harumachi Music",
+            "theme/ocean",
+            "sounds/audio_one.mp3",
+            "audio_one"
+        ),
+        MusicPlayerData(
+            "River with faraway bird sounds",
+            "by ValentineSeasons",
+            "theme/tokiyo",
+            "sounds/audio_two.mp3",
+            "audio_two"
+        )
     )
     val themeList = listOf(
-        "desert","mountain","ocean","snow","tokiyo","gradient-light","gradient-dark"
+        "desert", "mountain", "ocean", "snow", "tokiyo", "gradient-light", "gradient-dark"
+    ).sorted()
+
+    val pomodoroList = listOf(
+        30, 45, 60
+    ).sorted()
+
+    val shortTimerList = listOf(
+        5, 10, 15
     ).sorted()
 }
 
 @Stable
-fun Modifier.recomposeHighlighter(): Modifier = this.then(if(Constants.RECOMPOSER_ENABLED) recomposeModifier else Modifier)
+fun Modifier.recomposeHighlighter(): Modifier =
+    this.then(if (Constants.RECOMPOSER_ENABLED) recomposeModifier else Modifier)
 
 // Use a single instance + @Stable to ensure that recompositions can enable skipping optimizations
 // Modifier.composed will still remember unique data per call site.

@@ -13,9 +13,9 @@ object Constants {
     const val WEB: String = "web"
     const val DESKTOP: String = "desktop"
 
-    const val POMODORO_TIME: Int = 3
-    const val BREAK_TIMER_LONG: Int = 2
-    const val BREAK_TIMER_SHORT: Int = 1
+    const val POMODORO_TIME: Int = 45
+    const val BREAK_TIMER_LONG: Int = 30
+    const val BREAK_TIMER_SHORT: Int = 5
     const val POMODORO_SERIES_FREQUENCY: Int = 4
 
     const val RECOMPOSER_ENABLED: Boolean = true

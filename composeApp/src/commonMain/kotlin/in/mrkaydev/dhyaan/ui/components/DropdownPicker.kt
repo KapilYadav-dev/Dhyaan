@@ -85,3 +85,67 @@ fun DropdownPicker(
         }
     }
 }
+
+@Composable
+fun DropdownPickerInt(
+    items: List<Int>,
+    selectedItem: String,
+    onItemSelected: (Int) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier.recomposeHighlighter()
+            .fillMaxWidth()
+            .padding(16.dp)
+            .clip(RoundedCornerShape(12.dp))
+    ) {
+        Box(
+            modifier = Modifier.recomposeHighlighter()
+                .fillMaxWidth()
+                .clickable { expanded = true }
+        ) {
+            Text(
+                text = selectedItem,
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    fontFamily = FontLoader.appFont,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                ),
+                modifier = Modifier.recomposeHighlighter()
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(16.dp)
+            )
+            Icon(
+                imageVector = FeatherIcons.ChevronDown,
+                contentDescription = null,
+                tint = Color.Gray,
+                modifier = Modifier.recomposeHighlighter()
+                    .align(Alignment.CenterEnd)
+                    .padding(8.dp)
+            )
+        }
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            items.forEach { item ->
+                DropdownMenuItem(
+                    onClick = {
+                        onItemSelected(item)
+                        expanded = false
+                    },
+                    text = {
+                        Text(
+                            text = item.toString(), fontFamily = FontLoader.appFont,
+                            fontWeight = FontWeight.Light
+                        )
+                    }
+                )
+            }
+        }
+    }
+}
