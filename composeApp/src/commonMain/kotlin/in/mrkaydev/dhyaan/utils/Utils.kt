@@ -31,7 +31,7 @@ object Utils {
     }
 
     val settingsItem = listOf(
-        "general", "timers", "account"
+        "general", "account"
     )
 
     val musicList = listOf(

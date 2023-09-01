@@ -92,17 +92,17 @@ fun SettingDialog(onDismiss: () -> Unit) {
                         color = colorWhite.copy(0.4f)
                     )
                     Column(Modifier.recomposeHighlighter().weight(0.65f)) {
-                        when (selectSettingTitleIdx) {
-                            0 -> {
+                        when (settingsItem[selectSettingTitleIdx]) {
+                            "general" -> {
                                 GeneralSettings()
                             }
-                            1 -> {
+                            "timer" -> {
                                 TimerSettings()
                             }
-                            2 -> {
+                            "sounds" -> {
                                 SoundSettings()
                             }
-                            3 -> {
+                            "account" -> {
                                 AccountSettings()
                             }
                         }

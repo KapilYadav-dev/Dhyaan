@@ -22,6 +22,7 @@ class HomeViewModel : ScreenModel {
 
     private var audioPlayer: AudioPlayer? = null
     var isAnyAudioPlaying by mutableStateOf(false)
+    var musicCurrentIdx by mutableStateOf(0)
     var pomodoroCount by mutableStateOf(0)
     var isPomodoroSelected by mutableStateOf(true)
     var isLongBreakSelected by mutableStateOf(false)

@@ -69,12 +69,21 @@ class Home : Screen {
 
                 Box(Modifier.recomposeHighlighter().fillMaxSize()) {
                     Image(
-                        painterResource("images/theme/${Utils.settings.getString("theme",Constants.wallPaperId)}.jpeg"),
+                        painterResource(
+                            "images/theme/${
+                                Utils.settings.getString(
+                                    Constants.SELECTED_THEME_KEY,
+                                    Constants.wallPaperId
+                                )
+                            }.jpeg"
+                        ),
                         "bg",
                         Modifier.recomposeHighlighter().fillMaxSize(),
                         contentScale = if (platform == Constants.ANDROID) ContentScale.Crop else ContentScale.FillBounds
                     )
-                    ColumnComposed(Modifier.recomposeHighlighter().padding(start = 24.dp, top = 48.dp)) {
+                    ColumnComposed(
+                        Modifier.recomposeHighlighter().padding(start = 24.dp, top = 48.dp)
+                    ) {
                         Text(
                             Constants.APP_NAME,
                             fontSize = Constants.headerTitleTextSize,
@@ -92,11 +101,12 @@ class Home : Screen {
                             textAlign = TextAlign.Center
                         )
                     }
-                    ColumnComposed(Modifier.align(Alignment.TopEnd)){
+                    ColumnComposed(Modifier.align(Alignment.TopEnd)) {
                         Image(
                             painterResource("images/ui/setting.png"),
                             "",
-                            Modifier.recomposeHighlighter().padding(vertical = 64.dp, horizontal = 24.dp)
+                            Modifier.recomposeHighlighter()
+                                .padding(vertical = 64.dp, horizontal = 24.dp)
                                 .size(Constants.settingSize)
                                 .align(Alignment.TopEnd)
                                 .clickable {
@@ -104,9 +114,12 @@ class Home : Screen {
                                 }
                         )
                     }
-                    ColumnComposed(Modifier.recomposeHighlighter().align(Alignment.Center).fillMaxWidth()) {
+                    ColumnComposed(
+                        Modifier.recomposeHighlighter().align(Alignment.Center).fillMaxWidth()
+                    ) {
                         RowComposed(
-                            Modifier.recomposeHighlighter().fillMaxWidth().horizontalScroll(rememberScrollState()),
+                            Modifier.recomposeHighlighter().fillMaxWidth()
+                                .horizontalScroll(rememberScrollState()),
                         ) {
                             Spacer(Modifier.recomposeHighlighter().width(32.dp))
                             SelectableButton(
@@ -179,18 +192,34 @@ class Home : Screen {
                             )
                         }
                     }
-                    ColumnComposed(Modifier.align(Alignment.BottomStart)) {
-                        MusicPlayer(
-                            modifier = Modifier.recomposeHighlighter().fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
-                                .align(Alignment.BottomStart),
-                            { viewModel }
-                        )
+                    AnimatedVisibility(
+                        Utils.settings.getBoolean(
+                            Constants.MUSIC_ENABLED_KEY,
+                            true
+                        ),
+                        modifier = Modifier.recomposeHighlighter()
+                            .fillMaxWidth(if (platform == Constants.ANDROID || platform == Constants.IOS) 1f else 0.25f)
+                            .align(Alignment.BottomStart)
+                    ) {
+                        ColumnComposed(Modifier) {
+                            MusicPlayer(
+                                modifier = Modifier.recomposeHighlighter()
+                                    .fillMaxWidth(),
+                                { viewModel }
+                            )
+                        }
                     }
-
+                    if(!Utils.settings.getBoolean(
+                            Constants.MUSIC_ENABLED_KEY,
+                            true
+                        )) {
+                        viewModel.pauseAudio()
+                    }
                     if (platform == Constants.WEB) Icon(
                         FeatherIcons.Monitor,
                         "",
-                        modifier = Modifier.recomposeHighlighter().padding(32.dp).size(32.dp).align(Alignment.BottomEnd)
+                        modifier = Modifier.recomposeHighlighter().padding(32.dp).size(32.dp)
+                            .align(Alignment.BottomEnd)
                             .clickable {
                                 showFullScreenWebOnly()
                             },

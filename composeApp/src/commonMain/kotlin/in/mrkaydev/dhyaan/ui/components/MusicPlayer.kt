@@ -36,11 +36,11 @@ fun MusicPlayer(
     viewModel: () -> HomeViewModel,
     index: (Int) -> Unit = {}
 ) {
-    var isPlaying by remember { mutableStateOf(false) }
-    var currentIndex by remember { mutableStateOf(0) }
     val items by remember { mutableStateOf(Utils.musicList) }
-    val musicState = items[currentIndex]
+    var isPlaying by remember { mutableStateOf(false) }
+    val musicState = items[viewModel().musicCurrentIdx]
     val maxChars = 20
+
     val title = if (musicState.title.length > maxChars) {
         "${musicState.title.substring(0, maxChars)}..."
     } else {
@@ -96,10 +96,10 @@ fun MusicPlayer(
                 "left",
                 tint = colorWhite,
                 modifier = Modifier.recomposeHighlighter().size(32.dp).clickable {
-                    currentIndex = (currentIndex - 1 + items.size) % items.size
+                    viewModel().musicCurrentIdx = (viewModel().musicCurrentIdx - 1 + items.size) % items.size
                     isPlaying = true
-                    index(currentIndex)
-                    viewModel().playAudio(currentIndex)
+                    index(viewModel().musicCurrentIdx)
+                    viewModel().playAudio(viewModel().musicCurrentIdx)
                 }
             )
             Image(
@@ -124,10 +124,10 @@ fun MusicPlayer(
                 "right",
                 tint = colorWhite,
                 modifier = Modifier.recomposeHighlighter().size(32.dp).clickable {
-                    currentIndex = (currentIndex + 1) % items.size
+                    viewModel().musicCurrentIdx = (viewModel().musicCurrentIdx + 1) % items.size
                     isPlaying = true
-                    index(currentIndex)
-                    viewModel().playAudio(currentIndex)
+                    index(viewModel().musicCurrentIdx)
+                    viewModel().playAudio(viewModel().musicCurrentIdx)
                 }
             )
         }

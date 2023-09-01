@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import `in`.mrkaydev.dhyaan.theme.colorWhite
 import `in`.mrkaydev.dhyaan.ui.components.DropdownPicker
+import `in`.mrkaydev.dhyaan.ui.components.ToggleText
 import `in`.mrkaydev.dhyaan.utils.Constants
 import `in`.mrkaydev.dhyaan.utils.FontLoader
 import `in`.mrkaydev.dhyaan.utils.Utils
@@ -24,8 +25,16 @@ fun GeneralSettings() {
     var selectedWallpaperId by remember {
         mutableStateOf(
             Utils.settings.getString(
-                "theme",
+                Constants.SELECTED_THEME_KEY,
                 Constants.wallPaperId
+            )
+        )
+    }
+    var musicEnabled by remember {
+        mutableStateOf(
+            Utils.settings.getBoolean(
+                Constants.MUSIC_ENABLED_KEY,
+                true
             )
         )
     }
@@ -47,8 +56,16 @@ fun GeneralSettings() {
             selectedWallpaperId
         ) {
             scope.launch {
-                Utils.settings.putString("theme", it)
+                Utils.settings.putString(Constants.SELECTED_THEME_KEY, it)
                 selectedWallpaperId = it
+            }
+        }
+        ToggleText(Modifier.padding(start = 16.dp, top = 24.dp),{ "Show music player" }, enabled = {
+            musicEnabled
+        }) {
+            scope.launch {
+                Utils.settings.putBoolean(Constants.MUSIC_ENABLED_KEY, it)
+                musicEnabled = it
             }
         }
     }
