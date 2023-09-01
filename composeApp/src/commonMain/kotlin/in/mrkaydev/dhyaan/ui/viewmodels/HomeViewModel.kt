@@ -26,7 +26,7 @@ class HomeViewModel : ScreenModel {
     var isPomodoroSelected by mutableStateOf(true)
     var isLongBreakSelected by mutableStateOf(false)
     var isShortBreakSelected by mutableStateOf(false)
-    var showDialogForInstruction by mutableStateOf(true)
+    var showDialogForInstruction by mutableStateOf(false)
     var timerType by mutableStateOf("")
 
     private val _currentTime = MutableStateFlow((Constants.POMODORO_TIME).minutes.toLong(DurationUnit.MILLISECONDS))

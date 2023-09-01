@@ -1,5 +1,6 @@
 package `in`.mrkaydev.dhyaan.ui.screens
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -199,7 +200,7 @@ class Home : Screen {
                     )
                 }
 
-                if (viewModel.showDialogForInstruction) {
+                AnimatedVisibility(viewModel.showDialogForInstruction) {
                     val data = viewModel.timerType
                     val title = if (data == Constants.POMODORO_TIME_KEY) {
                         "Break time"
@@ -232,8 +233,7 @@ class Home : Screen {
                         viewModel.showDialogForInstruction = false
                     }
                 }
-
-                if (isSettingOpened) {
+                AnimatedVisibility(isSettingOpened) {
                     SettingDialog {
                         isSettingOpened = false
                     }
