@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.cocoapods)
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlinx.serialization)
+    id ("com.google.osdetector") version "1.7.3"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -32,15 +33,14 @@ kotlin {
 
     cocoapods {
         version = "1.0.0"
-        summary = "Compose application framework"
+        summary = "Dhyaan - A mindful app"
         homepage = "empty"
         ios.deploymentTarget = "11.0"
         podfile = project.file("../iosApp/Podfile")
         framework {
-            baseName = "ComposeApp"
+            baseName = "Dhyaan"
             isStatic = true
         }
-        extraSpecAttributes["resources"] = "['src/commonMain/resources/**']"
     }
 
     sourceSets {
@@ -56,13 +56,12 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
                 implementation(libs.voyager.navigator)
-                implementation(libs.napier)
                 implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.insetsx)
                 implementation(libs.ktor.core)
                 implementation(libs.composeIcons.featherIcons)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kstore)
+                implementation(libs.settings)
             }
         }
 
@@ -79,7 +78,6 @@ kotlin {
                 implementation(libs.compose.uitooling)
                 implementation(libs.kotlinx.coroutines.android)
                 implementation(libs.ktor.client.okhttp)
-                // android specific depend
             }
         }
 
@@ -88,21 +86,31 @@ kotlin {
                 implementation(compose.desktop.common)
                 implementation(compose.desktop.currentOs)
                 implementation(libs.ktor.client.okhttp)
-                // desktop
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
+                val fxSuffix = when (osdetector.classifier) {
+                    "linux-x86_64" -> "linux"
+                    "linux-aarch_64" -> "linux-aarch64"
+                    "windows-x86_64" -> "win"
+                    "osx-x86_64" -> "mac"
+                    "osx-aarch_64" -> "mac-aarch64"
+                    else -> throw IllegalStateException("Unknown OS: ${osdetector.classifier}")
+                }
+                implementation("org.openjfx:javafx-base:19:${fxSuffix}")
+                implementation("org.openjfx:javafx-graphics:19:${fxSuffix}")
+                implementation("org.openjfx:javafx-swing:19:${fxSuffix}")
+                implementation("org.openjfx:javafx-media:19:${fxSuffix}")
             }
         }
 
         val jsMain by getting {
             dependencies {
                 implementation(compose.html.core)
-                // web
             }
         }
 
         val iosMain by getting {
             dependencies {
                 implementation(libs.ktor.client.darwin)
-                // ios spec
             }
         }
 
@@ -111,11 +119,11 @@ kotlin {
 
 android {
     namespace = "in.mrkaydev.dhyaan"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
 
         applicationId = "in.mrkaydev.dhyaan.androidApp"
         versionCode = 1
@@ -138,8 +146,22 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "in.mrkaydev.dhyaan.desktopApp"
+            packageName = "Dhyaan"
             packageVersion = "1.0.0"
+            description = "Dhyaan - A mindful app"
+            copyright = "© 2023 Kapil Yadav. All rights reserved."
+            includeAllModules = true
+
+            val iconsRoot = project.file("src/commonMain/resources/images/app/")
+            macOS {
+                iconFile.set(iconsRoot.resolve("icon.icns"))
+            }
+            windows {
+                iconFile.set(iconsRoot.resolve("icon.ico"))
+            }
+            linux {
+                iconFile.set(iconsRoot.resolve("icon.png"))
+            }
         }
     }
 }
