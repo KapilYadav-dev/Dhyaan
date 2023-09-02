@@ -1,11 +1,17 @@
 package `in`.mrkaydev.dhyaan
 
 import android.app.Application
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.core.view.WindowCompat
+import `in`.mrkaydev.dhyaan.ui.components.AlertDialog
+import `in`.mrkaydev.dhyaan.ui.screens.App
 
 class AndroidApp : Application() {
     companion object {
@@ -21,16 +27,24 @@ class AndroidApp : Application() {
 class AppActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { App() }
-    }
-}
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        setContent {
+            var isBackPressed by rememberSaveable { mutableStateOf(false) }
 
-internal actual fun openUrl(url: String?) {
-    val uri = url?.let { Uri.parse(it) } ?: return
-    val intent = Intent().apply {
-        action = Intent.ACTION_VIEW
-        data = uri
-        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            if (isBackPressed) AlertDialog(positiveButtonClicked = {
+                isBackPressed = false
+            }, negativeButtonClicked = {
+                isBackPressed = false
+            }, dismissRequest = {
+                isBackPressed = false
+            },
+                title = "do you want to exit ?",
+                text = "if you want to exit, click exit"
+            )
+            BackHandler {
+                isBackPressed=true
+            }
+            App()
+        }
     }
-    AndroidApp.INSTANCE.startActivity(intent)
 }
