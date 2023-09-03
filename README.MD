@@ -10,11 +10,13 @@ Dhyaan is a cross-platform Pomodoro application built with Kotlin Multiplatform,
 
 Here are some images showcasing Dhyaan's interface:
 
-| Portrait Images                                                                          | Landscape Images                                                                         |
+| Android/Ios                                                                              | Desktop/Web                                                                              |
 |------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
 | ![Android](https://github.com/KapilYadav-dev/Dhyaan/blob/development/images/android.png) | ![Desktop](https://github.com/KapilYadav-dev/Dhyaan/blob/development/images/desktop.png) |
 | ![Ios](https://github.com/KapilYadav-dev/Dhyaan/blob/development/images/ios.png)         | ![Web](https://github.com/KapilYadav-dev/Dhyaan/blob/development/images/web.png)         | 
 
+![Feature Image](https://github.com/KapilYadav-dev/Dhyaan/blob/development/images/ui.png)
+ 
 ## Features
 
 - **Choose a Background**: Customize your workspace with various background options to create a calming and conducive environment for deep work.
