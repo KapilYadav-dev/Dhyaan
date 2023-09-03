@@ -1,7 +1,7 @@
 # Dhyaan - A Kotlin Multiplatform Pomodoro Application
 
 ![Dhyaan Logo]
-[<img src="https://github.com/KapilYadav-dev/Dhyaan/blob/development/images/icon.png" width="250" height="250/>]
+<img src="https://github.com/KapilYadav-dev/Dhyaan/blob/development/images/icon.png" width="300" alt="Dhyaan Screenshot">
 
 ## Overview
 
